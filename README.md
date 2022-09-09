@@ -24,3 +24,11 @@ Entregas mínimas:
   - [ ] `Testes automatizados` (testes unitários ou testes de integração)
   
   
+ 
+ ## Banco de dados
+  Clique <a href="https://github.com/HelloBank-IBM/hellobank/blob/main/sql_script_hellobank.sql">aqui</a> para visualizar o Script SQL.
+  
+  Diagrama EER:
+  
+  ![image](https://user-images.githubusercontent.com/93226440/189342278-6d0ea203-a242-4d63-b4c6-b434655bf84e.png)
+
