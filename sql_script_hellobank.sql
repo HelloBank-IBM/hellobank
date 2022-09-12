@@ -5,6 +5,7 @@ use hellobank;
 CREATE TABLE `cliente` (
   `id_cliente` int not null auto_increment,
   `nome` varchar(60) not null,
+  `senha` varchar(15) not null,
   `contato` varchar(11),
   `cpf_cnpj` varchar(20) not null unique,
   `endereco` varchar(100),
@@ -21,6 +22,7 @@ CREATE TABLE `tipo_conta` (
 CREATE TABLE `conta` (
   `id_conta` int not null auto_increment,
   `cliente` int not null,
+  `numero_conta` int not null,
   `saldo` float not null,
   `tipo_conta` int not null,
   PRIMARY KEY (`id_conta`),
@@ -50,13 +52,13 @@ CREATE TABLE `transacao` (
 /*Script para a Populacao dos dados*/
 
 INSERT INTO cliente VALUES
-(null, "Thiago Conceicao de Oliveira", "21987894321", "63720145999", "Rua A, Bairro A, CidadeA1-RJ", "thiago@texte.com"),
-(null, "Amanda da Rocha Pitta", "71987665321", "16553786194", "Rua B, Bairro B, CidadeB2-RJ", "amanda@texte.com"),
-(null, "Walderney Oliveira Azevedo", "98984354321", "14288772230", "Rua C, Bairro C CidadeC3-RJ", "walderney@texte.com"),
-(null, "Cristiane Barros Cruz", "21987994321", "18188223425", "Rua D, Bairro D, CidadeD4-RJ", "cristiane@texte.com"),
-(null, "Natanael Carvalho de Queiroz", "71980054321", "16021023765", "Rua E, Bairro E, CidadeE5-RJ", "natanael@gtexte.com"),
-(null, "Marcus Vinicius Lameu Lima", "71987074321", "16411146144", "Rua F, Bairro F, CidadeF6-RJ", "marcus@texte.com"),
-(null, "Wesner Souza Carvalho Filho", "71987904321", "60214647102", "Rua F, Bairro F, CidadeG7-RJ", "wesner@texte.com");
+(null, "Thiago Conceicao de Oliveira","369852147", "21987894321", "63720145999", "Rua A, Bairro A, CidadeA1-RJ", "thiago@teste.com"),
+(null, "Amanda da Rocha Pitta", "698521473","71987665321", "16553786194", "Rua B, Bairro B, CidadeB2-RJ", "amanda@teste.com"),
+(null, "Walderney Oliveira Azevedo","985214736", "98984354321", "14288772230", "Rua C, Bairro C CidadeC3-RJ", "walderney@teste.com"),
+(null, "Cristiane Barros Cruz","852,014369" ,"21987994321", "18188223425", "Rua D, Bairro D, CidadeD4-RJ", "cristiane@teste.com"),
+(null, "Natanael Carvalho de Queiroz", "521473698","71980054321", "16021023765", "Rua E, Bairro E, CidadeE5-RJ", "natanael@gteste.com"),
+(null, "Marcus Vinicius Lameu Lima", "214736985","71987074321", "16411146144", "Rua F, Bairro F, CidadeF6-RJ", "marcus@teste.com"),
+(null, "Wesner Souza Carvalho Filho", "147369852","71987904321", "60214647102", "Rua F, Bairro F, CidadeG7-RJ", "wesner@teste.com");
 
 INSERT INTO tipo_conta VALUES
 (null, "Corrente"),
@@ -65,13 +67,13 @@ INSERT INTO tipo_conta VALUES
 (null, "Salario");
 
 INSERT INTO conta VALUES
-(null, 1, 300.00, 1),
-(null, 2, 600.00, 2),
-(null, 3, 900.00, 3),
-(null, 4, 1200.00, 4),
-(null, 5, 1500.00, 1),
-(null, 6, 1800.00, 2),
-(null, 7, 2100.00, 3);
+(null, 1, 07111111,300.00, 1),
+(null, 2, 07122222,600.00, 2),
+(null, 3, 07133333,900.00, 3),
+(null, 4, 07144444,1200.00, 4),
+(null, 5, 07155551,1500.00, 1),
+(null, 6, 07166662,1800.00, 2),
+(null, 7, 07177773,2100.00, 3);
 
 INSERT INTO tipo_transacao VALUES
 (null, "Deposito"),
