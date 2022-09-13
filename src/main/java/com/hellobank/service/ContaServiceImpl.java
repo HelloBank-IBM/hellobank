@@ -3,6 +3,8 @@ package com.hellobank.service;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +18,27 @@ public class ContaServiceImpl implements IContaService {
     private ContaDAO dao;
 
     @Override
-    public Conta criarConta(Conta conta) {
-        if(conta.getCliente() != null && conta.getTipo() != null && conta.getSaldo() != null){
+    @Transactional
+    public Conta criarConta(Conta conta) {     
+        //Criando e preenchendo o número de conta da conta
+        var numeroConta =criarNumeroConta(conta);
+        conta.setNumeroConta(numeroConta);
+        //Inserindo saldo obrigatorio no registro de conta
+        Float saldoInicial = 500f;
+        conta.setSaldo(saldoInicial);
+        //Verificando se a conta já existe pelo id.
+        if(dao.existsById(conta.getCodigo())){
+            return null;
+        }
+        //Verificando se o cliente existe no banco de dados e se o tipo conta está preenchido;
+        if(conta.getCliente() != null && conta.getTipo() != null){
             dao.save(conta);
            }
         return null;
     }
 
     @Override
+    @Transactional
     public Conta atualizarConta(Conta conta) {
        if(conta.getNumeroConta() != null && conta.getCodigo() != null && conta.getCliente() != null && conta.getTipo() != null && conta.getSaldo() != null){
         dao.save(conta);
@@ -44,6 +59,7 @@ public class ContaServiceImpl implements IContaService {
     }
 
     @Override
+    @Transactional
     public void excluirConta(Integer id) {
         dao.deleteById(id);
     }

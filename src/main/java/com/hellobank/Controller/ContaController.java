@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.hellobank.Model.Conta;
 import com.hellobank.service.ContaServiceImpl;
-
+@RestController
 public class ContaController {
 
     @Autowired
-    private ContaServiceImpl service;
+    private  ContaServiceImpl service;
+    
 
     @GetMapping("/conta")
     public ArrayList<Conta> buscarContas(){
@@ -25,10 +27,7 @@ public class ContaController {
     
     @PostMapping("/conta")
     public ResponseEntity<Conta> incluirNovo(@RequestBody Conta novo){
-        Integer numeroConta =service.criarNumeroConta(novo) ;
-        novo.setNumeroConta(numeroConta);
         Conta res =service.criarConta(novo);
-        
         if(res != null){
                 return ResponseEntity.ok(res);
         }
