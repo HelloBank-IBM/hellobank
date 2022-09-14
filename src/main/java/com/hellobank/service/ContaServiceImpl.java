@@ -1,6 +1,7 @@
 package com.hellobank.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.transaction.Transactional;
@@ -20,29 +21,9 @@ public class ContaServiceImpl implements IContaService {
     @Override
     @Transactional
     public Conta criarConta(Conta conta) {     
-        //Criando e preenchendo o número de conta da conta
-        var numeroConta =criarNumeroConta(conta);
-        conta.setNumeroConta(numeroConta);
-        //Inserindo saldo obrigatorio no registro de conta
-        Float saldoInicial = 500f;
-        conta.setSaldo(saldoInicial);
-        //Verificando se a conta já existe pelo id.
-        if(dao.existsById(conta.getCodigo())){
-            return null;
-        }
-        //Verificando se o cliente existe no banco de dados e se o tipo conta está preenchido;
         if(conta.getCliente() != null && conta.getTipo() != null){
             dao.save(conta);
            }
-        return null;
-    }
-
-    @Override
-    @Transactional
-    public Conta atualizarConta(Conta conta) {
-       if(conta.getNumeroConta() != null && conta.getCodigo() != null && conta.getCliente() != null && conta.getTipo() != null && conta.getSaldo() != null){
-        dao.save(conta);
-       }
         return null;
     }
 
@@ -51,6 +32,11 @@ public class ContaServiceImpl implements IContaService {
         ArrayList<Conta> lista;
         lista = (ArrayList<Conta>) dao.findAll();
         return lista;
+    }
+
+    @Override
+    public Conta buscarContasCpf(Integer cpf) {
+        return dao.findById(cpf).orElse(null);
     }
 
     @Override
@@ -82,7 +68,8 @@ public class ContaServiceImpl implements IContaService {
         Integer numeroConta = Integer.parseInt(numero);
         return numeroConta;
     }
-        
+
+
     }
   
 

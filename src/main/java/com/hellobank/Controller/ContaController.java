@@ -27,6 +27,17 @@ public class ContaController {
     
     @PostMapping("/conta")
     public ResponseEntity<Conta> incluirNovo(@RequestBody Conta novo){
+        //Criando e preenchendo o númeroConta da conta
+        var numeroConta =service.criarNumeroConta(novo);
+        novo.setNumeroConta(numeroConta);
+        //Inserindo saldo obrigatorio no registro de conta
+        Float saldoInicial = 500f;
+        novo.setSaldo(saldoInicial);
+        //Verificando se a conta já existe pelo id.
+        if(service.buscarPeloId(novo.getCodigo()) != null){
+            return null;
+        }
+        //Verificando se o cliente existe no banco de dados e se o tipo conta está preenchido;
         Conta res =service.criarConta(novo);
         if(res != null){
                 return ResponseEntity.ok(res);
@@ -34,7 +45,7 @@ public class ContaController {
         return ResponseEntity.badRequest().build();
     }
     @DeleteMapping("/conta/{id}")
-    public ResponseEntity<Conta> excluirDepartamento(@PathVariable Integer id){
+    public ResponseEntity<Conta> excluirConta(@PathVariable Integer id){
         service.excluirConta(id);
         return ResponseEntity.ok(null);
     }
