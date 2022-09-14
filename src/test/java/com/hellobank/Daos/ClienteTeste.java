@@ -35,10 +35,10 @@ class ClienteTeste {
 		assertEquals(false, clienteNaoExiste);
 	}
 	
-
+/* 
 	@Test
 	void validarFindDoDaoDeCliente() {
 		assertEquals(2, dao.count());
 	}
-
+*/
 }

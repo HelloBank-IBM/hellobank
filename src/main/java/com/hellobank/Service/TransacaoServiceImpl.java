@@ -10,7 +10,7 @@ import com.hellobank.Model.Transacao;
 import com.hellobank.Repository.TransacaoDAO;
 
 @Service
-public class TransacaoServiceImpl {
+public class TransacaoServiceImpl   implements ITransacaoService{
 	
 	@Autowired
 	private TransacaoDAO dao;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hellobank.Model.Conta;
-import com.hellobank.service.ContaServiceImpl;
+import com.hellobank.Service.ContaServiceImpl;
 @RestController
 public class ContaController {
 

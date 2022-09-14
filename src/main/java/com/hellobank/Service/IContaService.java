@@ -1,4 +1,4 @@
-package com.hellobank.service;
+package com.hellobank.Service;
 
 import java.util.ArrayList;
 
