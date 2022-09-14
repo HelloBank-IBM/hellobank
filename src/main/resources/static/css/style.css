@@ -123,3 +123,10 @@
     text-align: center;
     backdrop-filter: blur(3px) !important;
 }
+
+/* Formulários do sistema */
+
+.btn-submit {
+    display: flex;
+    justify-content: center;
+}

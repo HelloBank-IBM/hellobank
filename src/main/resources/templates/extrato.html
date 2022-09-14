@@ -12,7 +12,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-    <title>HelloBank - Depósito</title>
+    <title>HelloBank - Saque</title>
 </head>
 
 <body>
@@ -66,19 +66,19 @@
                         </div>
                         <div class="offcanvas-body">
                             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="#"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="saldo.html"> <i
                                         class="fa-solid fa-sack-dollar menu-icon-lg"></i> Saldo </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="#"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="extrato.html"> <i
                                         class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
                                 <a class="col-1 menu-options-sm btn btn-outline-warning" href="saque.html"> <i
                                         class="fa-solid fa-hand-holding-dollar menu-icon-lg"></i> Saque </a>
                                 <a class="col-1 menu-options-sm btn btn-outline-warning" href="transferencia.html"> <i
                                         class="fa-solid fa-money-bill-transfer menu-icon-lg"></i> Transferir </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="#"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="novaConta.html"> <i
                                         class="fa-solid fa-square-plus menu-icon-lg"></i> <span>Nova Conta</span> </a>
                                 <a class="col-1 menu-options-sm btn btn-outline-warning" href="deposito.html"> <i
                                         class="fa-solid fa-money-bill-1-wave menu-icon-lg"></i> Depósito </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="#"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="configDados.html"> <i
                                         class="fa-solid fa-id-card menu-icon-lg"></i> Meus dados </a>
                             </div>
                         </div>
@@ -87,11 +87,11 @@
 
                 <div class="container justify-content-center border p-3 rounded-4 ">
 
-                    <form class="m-1">
-                        <legend><b>Depósito</b> - Preencha os dados abaixo</legend>
-
+                    <form class="mb-3 p-3 border-bottom">
+                        <legend> <b>Extrato</b> - Selecione a conta desejada </h4>
+                        </legend>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-lg-5">
                                 <label for="inputTipoConta" class="col-form-label" disabled>Conta</label>
                                 <select class="form-select" id="inputTipoConta"
                                     aria-label="Selecione a conta para depósito">
@@ -102,24 +102,49 @@
                                     <option value="4">Salário</option>
                                 </select>
                             </div>
-                            <div class="col">
-                                <label for="inputNumeroConta" class="col-form-label" disabled>Número</label>
-                                <input type="number" readonly class="form-control" id="inputNumeroConta"
-                                    value="07177773">
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
                             <div class="col-lg-5">
-                                <label for="valorDeposito" class="col-form-label mt-4"> Valor </label>
+                                <label for="inputNumeroConta" class="col-form-label" disabled>Número</label>
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" style="font-size: 1.5em">R$</span>
-                                    <input type="number" min="1" max="10000" step="1" class="form-control"
-                                        id="valorDeposito" value="0.00" style="font-size: 1.5em">
-                                    <a href="inicio.html" class="btn btn-lg btn-warning"> Depositar </a>
+                                    <input type="number" disabled class="form-control" id="inputNumeroConta"
+                                        value="07177773">
+                                    <button type="submit" class="btn btn-warning"> Gerar Extrato </button>
                                 </div>
                             </div>
                         </div>
                     </form>
+
+                    <table class="table table-hover" style="font-size: 0.8em">
+                        <thead>
+                            <tr class="table-dark" style="font-size: 0.8em">
+                                <th scope="col">Transação</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Depósito</th>
+                                <td>10/09/2022</td>
+                                <td>R$ 350.00</td>
+                                <td><a class="btn btn-outline-info"><i class="fa-solid fa-plus"></i></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Saque</th>
+                                <td>05/09/2022</td>
+                                <td>R$ 1200.00</td>
+                                <td><a class="btn btn-outline-info"><i class="fa-solid fa-plus"></i></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Transferência</th>
+                                <td>11/09/2022</td>
+                                <td>R$ 150.00</td>
+                                <td><a class="btn btn-outline-info"><i class="fa-solid fa-plus"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
                 </div>
             </div>
         </div>
