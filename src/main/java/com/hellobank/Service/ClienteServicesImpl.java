@@ -81,5 +81,8 @@ public class ClienteServicesImpl implements ICliente {
         
     }
 
-   
+    @Override
+    public ArrayList<Cliente> buscarPeloCpf(String cpf){
+        return dao.findByCpf(cpf);
+    }
 }

@@ -1,4 +1,4 @@
-package com.hellobank.service;
+package com.hellobank.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +20,10 @@ public class ContaServiceImpl implements IContaService {
 
     @Override
     @Transactional
-    public Conta criarConta(Conta conta) {     
-        if(conta.getCliente() != null && conta.getTipo() != null){
+    public Conta criarConta(Conta conta) {
+        if (conta.getCliente() != null && conta.getTipo() != null) {
             dao.save(conta);
-           }
+        }
         return null;
     }
 
@@ -41,7 +41,7 @@ public class ContaServiceImpl implements IContaService {
 
     @Override
     public Conta buscarPeloId(Integer id) {
-        return dao.findById(id).orElse(null); 
+        return dao.findById(id).orElse(null);
     }
 
     @Override
@@ -69,7 +69,4 @@ public class ContaServiceImpl implements IContaService {
         return numeroConta;
     }
 
-
-    }
-  
-
+}
