@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -52,7 +53,7 @@ public class ClienteController {
 		return ResponseEntity.badRequest().build();
 	}
 	@DeleteMapping("/cliente/{id}")
-	public ResponseEntity<Cliente> excluirDepartamento(@PathVariable Integer id) {
+	public ResponseEntity<Cliente> excluir(@PathVariable Integer id) {
 	
 		service.excluir(id);
 		return ResponseEntity.ok(null);
@@ -65,5 +66,10 @@ public class ClienteController {
 		}
 		
 		return ResponseEntity.badRequest().build();
+	}
+
+	@GetMapping("/cliente/busca")
+	public ArrayList<Cliente> buscarCpf(@RequestParam (name="cpf") String cpf){
+		return service.buscarPeloCpf(cpf);
 	}
 }

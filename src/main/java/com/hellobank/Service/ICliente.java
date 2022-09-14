@@ -11,5 +11,7 @@ public interface ICliente {
     public Cliente salvar(Cliente cliente);
     public Cliente atualizarDados(Cliente cliente);
     public  Cliente buscarPeloId(Integer id);
-	public void excluir(Integer id);
+	public ArrayList<Cliente> buscarPeloCpf(String cpf);
+    public void excluir(Integer id);
+
 }
