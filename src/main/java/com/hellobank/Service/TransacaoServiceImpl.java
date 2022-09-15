@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hellobank.DAO.TransacaoDAO;
 import com.hellobank.Model.Transacao;
-import com.hellobank.Repository.TransacaoDAO;
 
 @Service
 public class TransacaoServiceImpl   implements ITransacaoService{

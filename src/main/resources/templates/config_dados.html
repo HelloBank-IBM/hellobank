@@ -12,7 +12,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-    <title>HelloBank - Transferência</title>
+    <title>HelloBank - Configurações </title>
 </head>
 
 <body>
@@ -88,40 +88,54 @@
                 <div class="container justify-content-center border p-3 rounded-4 ">
 
                     <form class="m-1">
-                        <legend><b>Transferência</b> - Preencha os dados abaixo </legend>
+                        <legend><b>Configurações</b> - Meus Dados </legend>
 
-                        <div class="row">
-                            <div class="col">
-                                <label for="tipoContaOrigem" class="col-form-label" disabled>Conta de origem</label>
-                                <select class="form-select" id="tipoContaOrigem"
-                                    aria-label="Selecione sua conta">
-                                    <option selected>Selecionar</option>
-                                    <option value="1">Conta Corrente</option>
-                                    <option value="2">Poupança</option>
-                                    <option value="3">Universitária</option>
-                                    <option value="4">Salário</option>
-                                </select>
-                            </div>
-                            <div class="col">
-                                <label for="numeroContaOrigem" class="col-form-label" disabled>Número</label>
-                                <input type="number" readonly class="form-control" id="numeroContaOrigem"
-                                    value="07177773">
+                        <div class="col">
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" id="floatingNome" placeholder="Nome e Sobrenome" value="Nome e Sobrenome do Usuário">
+                                <label for="floatingNome">Nome Completo</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <label for="numeroContaDestinatario" class="col-form-label" disabled>Destinatário</label>
-                                <input type="number" class="form-control" id="numeroContaDestinatario" min="7100001" placeholder="Número da conta de destino">
+                                <div class="form-floating mb-4">
+                                    <input type="email" class="form-control" id="floatingEmail" placeholder="nome@email.com" value="nome@email.com">
+                                    <label for="floatingEmail">E-mail</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating mb-4">
+                                    <input type="password" class="form-control" id="floatingSenha" placeholder="******" value="123456">
+                                    <label for="floatingSenha">Senha</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5">
-                                <label for="valorTransferencia" class="col-form-label mt-4"> Valor </label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" style="font-size: 1.5em">R$</span>
-                                    <input type="number" min="1" max="10000" step="1" class="form-control"
-                                        id="valorTransferencia" value="0.00" style="font-size: 1.5em">
-                                    <a href="inicio.html" class="btn btn-lg btn-warning"> Transferir </a>
+                        <div class="col">
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" id="floatingEndereco" placeholder="Nome e Sobrenome" value="Rua Principal, número 01, Cidade - Estado - CEP 00000-000">
+                                <label for="floatingNome">Endereco</label>
+                            </div>
+                        </div>
+        
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating mb-4">
+                                    <input type="text" class="form-control" id="floatingCpf" placeholder="000.000.000-00" value="000.000.000-00" disabled>
+                                    <label for="floatingCpf">CPF | CNPJ</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating mb-4">
+                                    <input type="text" class="form-control" id="floatingContato" placeholder="(xx) 99999-9999" value="(xx) 99999-9999">
+                                    <label for="floatingContato">Contato</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex justify-content-center align">
+                                    <a class="btn btn-lg btn-outline-info mx-3" href="inicio.html">Cancelar</a>
+                                    <a class="btn btn-lg btn-warning mx-3" href="inicio.html">Salvar Alterações</a>
                                 </div>
                             </div>
                         </div>

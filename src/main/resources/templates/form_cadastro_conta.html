@@ -40,7 +40,7 @@
                                     <a class="nav-link" href="#">Sobre o projeto</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="https://github.com/HelloBank-IBM/hellobank" target="_blank">GitHub</a>
+                                    <a class="nav-link" href="#">GitHub</a>
                                 </li>
                                 <li>
                                     <a class="btn btn-outline-warning" href="login.html">Login</a>
@@ -58,65 +58,77 @@
             <div class="row text-light">
                 <h2 class="text-light">Formulário de Cadastro</h2>
                 <p>Preencha os dados abaixo para acessar o sistema. <br> Caso já possua cadastro, faça <a href="#"
-                        class="text-warning"> log in</a>.</p>
-                <p>Passo <b>1</b> de 2 : Preencha seus dados abaixo</p>
+                    class="text-warning"> log in</a>.</p>
+                <p> Passo <b>2</b> de 2 : Escolha o tipo de conta que deseja criar.</p>
             </div>
         </div>
         <div class="container-sm w-50">
             <form>
-                <div class="col">
-                    <div class="form-floating mb-4">
-                        <input type="text" class="form-control" id="floatingNome" placeholder="Nome e Sobrenome">
-                        <label for="floatingNome">Nome Completo</label>
-                    </div>
-                </div>
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="col">
-                        <div class="form-floating mb-4">
-                            <input type="email" class="form-control" id="floatingEmail" placeholder="nome@email.com">
-                            <label for="floatingEmail">E-mail</label>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="floatingSenha" placeholder="******">
-                            <label for="floatingSenha">Senha</label>
+                        <div class="input-group mb-3">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Escolha o tipo de conta</option>
+                                <option value="1">Corrente</option>
+                                <option value="2">Poupança</option>
+                                <option value="3">Universitária</option>
+                                <option value="4">Salário</option>
+                            </select>
+                            <a href="login.html" class="btn btn-lg btn-warning"> Confirmar Cadastro </a>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-floating mb-4">
-                        <input type="text" class="form-control" id="floatingEndereco" placeholder="Endereço Completo">
-                        <label for="floatingEndereco">Endereco</label>
+            </form>
+            <form class="bg-light p-3 bg-opacity-25 border border-light rounded-4">
+                <legend class="text-light">Seus dados:</legend>
+                <div class="justify-content-center">
+                    <div class="rol">
+                        <div class="col form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingNome" placeholder="Nome e Sobrenome" value="Nome e Sobrenome do Usuário" disabled>
+                            <label for="floatingNome">Nome Completo</label>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="floatingEmail"
+                                    placeholder="nome@email.com" value="nome@email.com" disabled>
+                                <label for="floatingEmail">E-mail</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingSenha" placeholder="******" value="123456" disabled>
+                                <label for="floatingSenha">Senha</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingEndereco"
+                                placeholder="Endereço Completo" value="Rua Principal, número 01, Cidade - Estado - CEP 00000-000" disabled>
+                            <label for="floatingNome">Endereco</label>
+                        </div>
+                    </div>
 
-                <div class="row">
-                    <div class="col">
-                        <div class="form-floating mb-4">
-                            <input type="text" class="form-control" id="floatingCpf" placeholder="000.000.000-00">
-                            <label for="floatingCpf">CPF | CNPJ</label>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb">
+                                <input type="text" class="form-control" id="floatingCpf" placeholder="000.000.000-00" value="000.000.000-00" disabled>
+                                <label for="floatingCpf">CPF | CNPJ</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-floating mb-4">
-                            <input type="text" class="form-control" id="floatingContato" placeholder="(xx) 99999-9999">
-                            <label for="floatingContato">Contato</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="d-flex justify-content-center align">
-                            <button class="btn btn-lg btn-outline-info mx-3 border-light" type="reset" style="color: var(--bs-light)">Limpar</button>
-                            <a class="btn btn-lg btn-warning mx-3" href="form_cadastro_conta.html">Prosseguir</a>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="floatingContato"
+                                    placeholder="(xx) 99999-9999" value="(xx) 99999-9999" disabled>
+                                <label for="floatingContato">Contato</label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-    </div>
-    </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"

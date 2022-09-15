@@ -1,4 +1,4 @@
-package com.hellobank.Repository;
+package com.hellobank.DAO;
 
 import org.springframework.data.repository.CrudRepository;
 
