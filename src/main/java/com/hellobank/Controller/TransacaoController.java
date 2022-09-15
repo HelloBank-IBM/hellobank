@@ -21,9 +21,9 @@ public class TransacaoController {
 	@Autowired
 	private ITransacaoService service;
 
-	@GetMapping("/transacao/{id_transacao}")
-	public ResponseEntity<Transacao> buscar(@PathVariable("id_transacao") Integer id_transacao) {
-		Transacao tr = service.buscar(id_transacao);
+	@GetMapping("/transacao/{id}")
+	public ResponseEntity<Transacao> buscar(@PathVariable("id") Integer id) {
+		Transacao tr = service.buscar(id);
 		if (tr != null) {
 			return ResponseEntity.ok(tr);
 		}

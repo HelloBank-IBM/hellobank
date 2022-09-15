@@ -1,62 +1,70 @@
 package com.hellobank.Model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Transacao {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column
-	private Integer id_transacao;
+	@Column(name="id_transacao")
+	private Integer id;
 	
-	@Column
-	private Integer conta_origem;
+	@ManyToOne
+	@JoinColumn(name="conta_origem")
+	private Conta contaOrigem;
 	
-	@Column
-	private Integer conta_destino;
+	@ManyToOne
+	@JoinColumn(name="conta_destino")
+	private Conta contaDestino;
 	
-	@Column
-	private Date data;
+	@Column(name="data")
+	private LocalDate data;
 	
-	@Column
+	@Column(name="valor")
 	private float valor;
 
-	public Integer getId_transacao() {
-		return id_transacao;
+	@ManyToOne
+	@JoinColumn(name="tipo_transacao")
+	private TipoTransacao tipoTransacao;
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId_transacao(Integer id_transacao) {
-		this.id_transacao = id_transacao;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public Integer getConta_origem() {
-		return conta_origem;
+	public Conta getContaOrigem() {
+		return contaOrigem;
 	}
 
-	public void setConta_origem(Integer conta_origem) {
-		this.conta_origem = conta_origem;
+	public void setContaOrigem(Conta contaOrigem) {
+		this.contaOrigem = contaOrigem;
 	}
 
-	public Integer getConta_destino() {
-		return conta_destino;
+	public Conta getContaDestino() {
+		return contaDestino;
 	}
 
-	public void setConta_destino(Integer conta_destino) {
-		this.conta_destino = conta_destino;
+	public void setContaDestino(Conta contaDestino) {
+		this.contaDestino = contaDestino;
 	}
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
