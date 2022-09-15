@@ -6,31 +6,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="tipo_transacao")
 public class TipoTransacao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_transacao")
-	private Integer id_tipo_transacao;
+	private Integer id;
 	
 	@Column(name = "nome_tipo_transacao", length = 50, nullable = false)
-	private String nome_tipo_transacao;
+	private String nome;
 
-	public Integer getId_tipo_transacao() {
-		return id_tipo_transacao;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId_tipo_transacao(Integer id_tipo_transacao) {
-		this.id_tipo_transacao = id_tipo_transacao;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getNome_tipo_transacao() {
-		return nome_tipo_transacao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNome_tipo_transacao(String nome_tipo_transacao) {
-		this.nome_tipo_transacao = nome_tipo_transacao;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 }

@@ -14,5 +14,5 @@ public interface ClienteDAO extends CrudRepository<Cliente,Integer> {
 
     @Query(value="select CASE WHEN count(1) > 0 THEN 'true' ELSE 'false' END  from cliente where email = :email",  nativeQuery = true)
     public boolean emailExiste(String email);
-    public ArrayList<Cliente> findByCpf(String cpf);
+    public ArrayList<Cliente> findByCpfCnpj(String cpf);
 }

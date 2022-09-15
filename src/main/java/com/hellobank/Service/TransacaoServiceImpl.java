@@ -16,8 +16,8 @@ public class TransacaoServiceImpl   implements ITransacaoService{
 	private TransacaoDAO dao;
 	
     @Override
-	public Transacao buscar(Integer id_transacao) {
-		return dao.findById(id_transacao).orElse(null);
+	public Transacao buscar(Integer id) {
+		return dao.findById(id).orElse(null);
 	}
 	
     @Override

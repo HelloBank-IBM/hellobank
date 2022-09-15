@@ -34,7 +34,7 @@ public class ContaController {
         Float saldoInicial = 500f;
         novo.setSaldo(saldoInicial);
         //Verificando se a conta já existe pelo id.
-        if(service.buscarPeloId(novo.getCodigo()) != null){
+        if(service.buscarPeloId(novo.getId()) != null){
             return null;
         }
         //Verificando se o cliente existe no banco de dados e se o tipo conta está preenchido;

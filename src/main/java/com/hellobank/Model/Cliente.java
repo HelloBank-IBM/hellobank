@@ -25,7 +25,6 @@ public class Cliente {
     private String endereco;
     @Column(length = 50,nullable = false)
     private String email;
-  
     @Column(length =25 ,nullable=false)
     private String senha;
 
