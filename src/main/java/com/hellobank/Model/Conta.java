@@ -15,7 +15,7 @@ public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_conta")
-    private Integer codigo;
+    private Integer id;
 
    @ManyToOne
    @JoinColumn(name = "tipo_conta", nullable = false)
@@ -31,12 +31,12 @@ public class Conta {
     @Column(name = "numero_conta")
     private Integer numeroConta;
 
-    public Integer getCodigo() {
-        return codigo;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public TipoConta getTipo() {
