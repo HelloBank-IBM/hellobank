@@ -8,8 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hellobank.DAO.ClienteDAO;
 import com.hellobank.Model.Cliente;
-import com.hellobank.Repository.ClienteDAO;
 import com.hellobank.Service.exception.CpfCnpjObrigatorioClienteException;
 import com.hellobank.Service.exception.EmailClienteJaCadastradoException;
 import com.hellobank.Service.exception.ObjetoNaoEncontradoException;

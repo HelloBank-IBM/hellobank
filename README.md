@@ -30,5 +30,6 @@ Entregas mínimas:
   
   Diagrama EER:
   
-  ![image](https://user-images.githubusercontent.com/93226440/189342278-6d0ea203-a242-4d63-b4c6-b434655bf84e.png)
+  ![image](https://user-images.githubusercontent.com/93226440/190196397-1e023b8b-b799-4372-a058-22f785179fbe.png)
+
 

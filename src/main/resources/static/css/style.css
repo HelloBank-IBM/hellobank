@@ -1,0 +1,132 @@
+
+/* --------- Tela de login e Cadastro ----------*/
+
+ /* Background */
+#bg-gradient{
+    background-image: linear-gradient(150deg, #000320, #002B5B, #2B4865, #256D85, #3396b8);
+    background-size: 300% ;
+    width: 100%;
+    min-height: 100vh;
+    background-repeat: repeat-x;
+    animation: animated-gradient 5s infinite alternate;
+}
+
+.form-container {
+	max-width: 26rem;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 2.25rem 1.25rem 1.25rem 1.25rem;
+	border-radius: 0.5rem;
+	background-color: var(--bs-secondary);
+}
+
+.btn-login {
+	display: inline-block;
+	width: 100%;
+    max-width: 300px;
+    margin: 20px;
+	height: 3.125rem;
+	border: 1px solid #002B5B;
+	background-color: #002B5B;
+	color: var(--bs-light) !important;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.btn-login:hover {
+	background-color: var(--bs-warning) !important;
+    border: 1px solid var(--bs-warning) !important;
+}
+
+/* Footer */
+
+.footer-divider {
+    height: 20vh;
+}
+
+/* Animação */ 
+@keyframes animated-gradient {
+    0% {
+        background-position-x: 0%;
+    }
+    100% {
+        background-position-x: 100%;
+    }
+}
+
+/* ----------- Telas do Sistema  -----------*/
+
+/* Menu lateral */
+.sidebar {
+    background-image: linear-gradient(to bottom, #000320, #002B5B, #2B4865, #256D85);
+    color: var(--bs-light) !important;
+}
+
+.sidebar-item {
+    color: var(--bs-light) !important;
+    padding: 20px;
+}
+
+.sidebar-item:hover {
+    color: var(--bs-warning) !important;
+    margin-left: 15px;
+    text-decoration:underline;
+    transition: 0.5s;
+}
+
+/* navbar */
+.nav-bg-gradient {
+    background-image: linear-gradient(150deg, #000320, #002B5B, #2B4865, #256D85, #3396b8);
+    height: 7em;
+    min-width: 100vw;
+    padding: 0;
+}
+
+/* icones */
+.icons i,
+.icons svg {
+   color: var(--bs-warning);
+}
+
+/* Menus do sistema */
+
+.menu-options {
+    min-height: 150px;
+    min-width: 150px;
+    border-radius: 20px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1.3em;
+    font-weight: bold;
+    flex-wrap: wrap;
+}
+
+.menu-icon-lg {
+    font-size: 3em;
+    color: inherit;
+}
+
+.menu-options-sm {
+    font-size: 1em;
+    font-weight: bold;
+    flex-wrap: wrap;
+    backdrop-filter: blur (10px);
+}
+
+.offcanvas {
+    background-color: #002a5b8d;
+}
+
+.menu-offcanvas {
+    text-align: center;
+    backdrop-filter: blur(3px) !important;
+}
+
+/* Formulários do sistema */
+
+.btn-submit {
+    display: flex;
+    justify-content: center;
+}
