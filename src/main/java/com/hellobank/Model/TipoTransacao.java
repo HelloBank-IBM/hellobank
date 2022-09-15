@@ -15,10 +15,10 @@ public class TipoTransacao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id_tipo_transacao")
 	private Integer id;
 	
-	@Column(name = "nome", length = 50, nullable = false)
+	@Column(name = "nome_tipo_transacao", length = 50, nullable = false)
 	private String nome;
 
 	public Integer getId() {
