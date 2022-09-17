@@ -15,7 +15,6 @@ import com.hellobank.Model.Transacao;
 import com.hellobank.Service.ITransacaoService;
 
 @RestController
-@RequestMapping(path = "/hellobank")
 public class TransacaoController {
 
 	@Autowired

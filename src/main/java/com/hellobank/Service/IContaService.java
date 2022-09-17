@@ -13,5 +13,6 @@ public interface IContaService {
     public void excluirConta(Integer id);
     public Integer criarNumeroConta(Conta conta);
     public Conta depositar(Conta conta, float valor);
+    public Conta transferencia(Conta conta, float valor,Conta contaDestino);
 
 }
