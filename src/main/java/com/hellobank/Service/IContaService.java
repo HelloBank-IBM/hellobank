@@ -8,9 +8,10 @@ public interface IContaService {
     
     public Conta criarConta(Conta conta);
     public ArrayList<Conta> buscarContas();
-    public Conta buscarContasCpf(Integer cpf);
+    public Conta buscarPeloNumero(Integer numero);
     public Conta buscarPeloId(Integer id);
     public void excluirConta(Integer id);
     public Integer criarNumeroConta(Conta conta);
+    public Conta depositar(Conta conta, float valor);
 
 }

@@ -22,7 +22,7 @@ public class TransacaoController {
 	private ITransacaoService service;
 
 	@GetMapping("/transacao/{id}")
-	public ResponseEntity<Transacao> buscar(@PathVariable("id") Integer id) {
+	public ResponseEntity<Transacao> buscar(@PathVariable Integer id) {
 		Transacao tr = service.buscar(id);
 		if (tr != null) {
 			return ResponseEntity.ok(tr);
