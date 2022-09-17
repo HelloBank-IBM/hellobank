@@ -10,8 +10,8 @@ public interface ICliente {
     public ArrayList<Cliente> buscarTodos();
     public Cliente salvar(Cliente cliente);
     public Cliente atualizarDados(Cliente cliente);
-    public  Cliente buscarPeloId(Integer id);
-	public ArrayList<Cliente> buscarPeloCpf(String cpf);
+    public Cliente buscarPeloId(Integer id);
     public void excluir(Integer id);
+    public Cliente buscarPeloCpf(String cpf);
 
 }

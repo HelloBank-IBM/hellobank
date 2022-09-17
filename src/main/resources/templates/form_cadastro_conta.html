@@ -1,53 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-    <title>Cadastro</title>
-</head>
+<head th:replace="~{partials :: head}"></head>
 
-<body>
-    <!-- Background -->
-    <div class="container-fluid" id="bg-gradient">
+<body id="bg-gradient">
+    <!-- Container -->
+    <div class="container-fluid">
 
         <!-- Navbar -->
 
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark pt-3">
-                <div class="container-fluid">
-                    <a class="navbar-brand text-light h4" href="#"><strong class="text-warning">Hello</strong>Bank</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                            <li></li>
-                        </ul>
-                        <ul class="navbar-nav">
-                            <div class="d-flex">
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="#">Início</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Sobre o projeto</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">GitHub</a>
-                                </li>
-                                <li>
-                                    <a class="btn btn-outline-warning" href="login.html">Login</a>
-                                </li>
-                        </ul>
-                    </div>
-                </div>
+            <nav th:replace="~{partials :: navbar-index}">
             </nav>
         </div>
 
@@ -57,72 +20,69 @@
         <div class="container-md text-center mt-0">
             <div class="row text-light">
                 <h2 class="text-light">Formulário de Cadastro</h2>
-                <p>Preencha os dados abaixo para acessar o sistema. <br> Caso já possua cadastro, faça <a href="#"
-                    class="text-warning"> log in</a>.</p>
                 <p> Passo <b>2</b> de 2 : Escolha o tipo de conta que deseja criar.</p>
             </div>
         </div>
         <div class="container-sm w-50">
-            <form>
+            <form th:action="@{/hellobank/view/cadastro/{idCliente}(idCliente=${cliente.id})}" method="post">
+                <span style="color: red;">
+                    <input type="number" th:field="*{cliente}" th:value="${idCliente}" th:text="${idCliente}" name="cliente" id="cliente" readonly>
+                </span>
                 <div class="row justify-content-center">
                     <div class="col">
                         <div class="input-group mb-3">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Escolha o tipo de conta</option>
-                                <option value="1">Corrente</option>
-                                <option value="2">Poupança</option>
-                                <option value="3">Universitária</option>
-                                <option value="4">Salário</option>
+                            <select th:field="*{tipo}" class="form-select">
+                                <option selected th:value="0">Escolha o tipo de conta</option>
+                                <option th:each="tipoConta : ${tiposConta}" th:value="${tipoConta.codigo}" th:text="${tipoConta.nome}" ></option>
                             </select>
-                            <a href="login.html" class="btn btn-lg btn-warning"> Confirmar Cadastro </a>
+                            <input type=submit class="btn btn-lg btn-warning" value="Confirmar Cadastro" />
                         </div>
                     </div>
                 </div>
-            </form>
-            <form class="bg-light p-3 bg-opacity-25 border border-light rounded-4">
+            </form>            
+            <form th:object="${cliente}" class="bg-light p-3 bg-opacity-25 border border-light rounded-4">
                 <legend class="text-light">Seus dados:</legend>
                 <div class="justify-content-center">
-                    <div class="rol">
+                    <div class="row">
                         <div class="col form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingNome" placeholder="Nome e Sobrenome" value="Nome e Sobrenome do Usuário" disabled>
-                            <label for="floatingNome">Nome Completo</label>
+                            <input th:field="*{nome}" type="text" class="form-control" id="nome" placeholder="Nome e Sobrenome" disabled>
+                            <label for="nome">Nome Completo</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingEmail"
-                                    placeholder="nome@email.com" value="nome@email.com" disabled>
-                                <label for="floatingEmail">E-mail</label>
+                                <input th:field="*{email}" type="email" class="form-control" id="email" placeholder="nome@email.com" disabled>
+                                <label for="email">E-mail</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingSenha" placeholder="******" value="123456" disabled>
-                                <label for="floatingSenha">Senha</label>
+                                <label for="senha">Senha</label>
+                                <input th:field="*{senha}" type="password" class="form-control" id="senha" placeholder="******" disabled>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingEndereco"
-                                placeholder="Endereço Completo" value="Rua Principal, número 01, Cidade - Estado - CEP 00000-000" disabled>
-                            <label for="floatingNome">Endereco</label>
+                            <input th:field="*{endereco}"  type="text" class="form-control" id="endereco" placeholder="Endereço Completo" disabled>
+                            <label for="endereco">Endereco</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <div class="form-floating mb">
-                                <input type="text" class="form-control" id="floatingCpf" placeholder="000.000.000-00" value="000.000.000-00" disabled>
-                                <label for="floatingCpf">CPF | CNPJ</label>
+                                <input th:field="*{cpfCnpj}" type="text" class="form-control" id="cpfCnpj" placeholder="000.000.000-00" disabled>
+                                <label for="cpfCnpj">CPF | CNPJ</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingContato"
-                                    placeholder="(xx) 99999-9999" value="(xx) 99999-9999" disabled>
-                                <label for="floatingContato">Contato</label>
+                                <input th:field="*{contato}" type="number" class="form-control" id="contato"
+                                    placeholder="(xx) 99999-9999" disabled>
+                                <label for="contato">Contato</label>
                             </div>
                         </div>
                     </div>
@@ -131,14 +91,9 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-        crossorigin="anonymous"></script>
+    <div th:replace="~{partials :: footer-login}"></div>
+
+    <div th:replace="~{partials :: scripts}"></div>
 </body>
 
 </html>

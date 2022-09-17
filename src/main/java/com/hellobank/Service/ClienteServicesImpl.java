@@ -82,7 +82,12 @@ public class ClienteServicesImpl implements ICliente {
     }
 
     @Override
-    public ArrayList<Cliente> buscarPeloCpf(String cpf){
-        return dao.findByCpfCnpj(cpf);
+    public Cliente buscarPeloCpf(String cpf){
+        Cliente cliente = dao.encontrarPorCpf(cpf);
+        if (cliente != null) {
+            return cliente;
+        } else {
+            return null;
+        }
     }
 }
