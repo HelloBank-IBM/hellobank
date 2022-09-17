@@ -34,8 +34,8 @@ public class ContaServiceImpl implements IContaService {
     }
 
     @Override
-    public Conta buscarContasCpf(Integer cpf) {
-        return dao.findById(cpf).orElse(null);
+    public Conta buscarPeloNumero(Integer numero) {
+        return dao.buscarNum(numero);
     }
 
     @Override
@@ -66,6 +66,15 @@ public class ContaServiceImpl implements IContaService {
         numero = String.valueOf(numeroBanco) + numero + String.valueOf(conta.getTipo().getCodigo());
         Integer numeroConta = Integer.parseInt(numero);
         return numeroConta;
+    }
+
+    @Override
+    public Conta depositar(Conta conta, float valor) {
+        if(conta.getId()!=null && conta.getCliente()!=null && conta.getNumeroConta()!=null && conta.getTipo()!=null){
+            conta.setSaldo(conta.getSaldo()+valor);
+            return dao.save(conta);
+        }
+        return null;
     }
 
 }
