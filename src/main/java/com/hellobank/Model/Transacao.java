@@ -36,6 +36,14 @@ public class Transacao {
 	@JoinColumn(name="tipo_transacao")
 	private TipoTransacao tipoTransacao;
 
+	public TipoTransacao getTipoTransacao() {
+		return tipoTransacao;
+	}
+
+	public void setTipoTransacao(TipoTransacao tipoTransacao) {
+		this.tipoTransacao = tipoTransacao;
+	}
+
 	public Integer getId() {
 		return id;
 	}

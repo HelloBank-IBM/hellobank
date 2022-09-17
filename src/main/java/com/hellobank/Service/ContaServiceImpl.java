@@ -1,5 +1,7 @@
 package com.hellobank.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,14 +11,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hellobank.DAO.ContaDAO;
+import com.hellobank.DAO.TipoTransacaoDAO;
+import com.hellobank.DAO.TransacaoDAO;
 import com.hellobank.Model.Conta;
+import com.hellobank.Model.TipoTransacao;
+import com.hellobank.Model.Transacao;
 
 @Service
 public class ContaServiceImpl implements IContaService {
 
     @Autowired
     private ContaDAO dao;
-
+    @Autowired
+    private TransacaoDAO transacaoDao;
+    @Autowired
+    private TipoTransacaoDAO tipoTransacaoDao;
     @Override
     @Transactional
     public Conta criarConta(Conta conta) {
@@ -30,6 +39,7 @@ public class ContaServiceImpl implements IContaService {
     public ArrayList<Conta> buscarContas() {
         ArrayList<Conta> lista;
         lista = (ArrayList<Conta>) dao.findAll();
+        
         return lista;
     }
 
@@ -72,9 +82,29 @@ public class ContaServiceImpl implements IContaService {
     public Conta depositar(Conta conta, float valor) {
         if(conta.getId()!=null && conta.getCliente()!=null && conta.getNumeroConta()!=null && conta.getTipo()!=null){
             conta.setSaldo(conta.getSaldo()+valor);
+            
             return dao.save(conta);
         }
         return null;
+    }
+
+    @Override
+    public Conta transferencia(Conta contaOrigem, float valor,Conta contaDestino) {
+        var chequeEspecial =200f;
+            if(contaOrigem.getId()!=null && contaOrigem.getCliente()!=null && contaOrigem.getNumeroConta()!=null && contaOrigem.getTipo()!=null){
+                if(contaOrigem.getSaldo()>=0){
+                    contaOrigem.setSaldo(contaOrigem.getSaldo()-valor);
+                    contaDestino.setSaldo(contaDestino.getSaldo()+valor);
+                    dao.save(contaDestino);
+                    return dao.save(contaOrigem);
+                }else if (contaOrigem.getSaldo()+chequeEspecial >= valor && contaOrigem.getTipo().getCodigo()==1){
+                        contaOrigem.setSaldo(contaOrigem.getSaldo()-valor);
+                        contaDestino.setSaldo(contaDestino.getSaldo()+valor);
+                        dao.save(contaDestino);
+                        return dao.save(contaOrigem);
+                    }
+                }
+        return null;       
     }
 
 }

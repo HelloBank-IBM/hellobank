@@ -26,8 +26,8 @@ public class TransacaoServiceImpl   implements ITransacaoService{
 	}
 	
     @Override
-	public List<Transacao> listar() {
-		return (ArrayList<Transacao>)dao.listar();
+	public ArrayList<Transacao> listar() {
+		return (ArrayList<Transacao>)dao.findAll();
 	
 	}
 }
