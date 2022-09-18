@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hellobank.DAO.TipoTransacaoDAO;
 import com.hellobank.Model.Conta;
+import com.hellobank.Model.TipoTransacao;
 import com.hellobank.Model.Transacao;
 import com.hellobank.Service.ContaServiceImpl;
 import com.hellobank.Service.TransacaoServiceImpl;
@@ -24,7 +25,9 @@ public class ContaController {
 
     @Autowired
     private  ContaServiceImpl service;
-    
+    @Autowired
+    private  TipoTransacaoDAO dao;
+
     @Autowired
     private  TransacaoServiceImpl serviceTransacao;
     
@@ -71,8 +74,8 @@ public class ContaController {
        
         Conta aux=service.buscarPeloNumero(numero);
         Transacao transacao = new Transacao();
-        TransacaoController transacaoController = new TransacaoController();
-        Conta res=service.depositar(aux, valor);
+           
+        Conta res=service.depositar(aux, valor,transacao);
 		if (res!=null) {
 			return ResponseEntity.ok(res);
 		}
@@ -80,10 +83,10 @@ public class ContaController {
     }
     @PutMapping("/transferencia/{valor}/{numeroOrigem}/{numeroDestino}")
     public ResponseEntity<Conta> transferencia(@PathVariable float valor,@PathVariable Integer numeroOrigem,@PathVariable Integer numeroDestino){
-        
+        Transacao transacao = new Transacao();
         Conta auxOrigem=service.buscarPeloNumero(numeroOrigem);
         Conta auxDestino=service.buscarPeloNumero(numeroDestino);
-        Conta res=service.transferencia(auxOrigem, valor, auxDestino);
+        Conta res=service.transferencia(auxOrigem, valor, auxDestino,transacao);
         
 		if (res!=null) {
 			return ResponseEntity.ok(res);

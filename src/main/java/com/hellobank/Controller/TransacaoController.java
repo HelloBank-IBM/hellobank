@@ -20,13 +20,10 @@ public class TransacaoController {
 	@Autowired
 	private ITransacaoService service;
 
-	@GetMapping("/transacao/{id}")
-	public ResponseEntity<Transacao> buscar(@PathVariable Integer id) {
-		Transacao tr = service.buscar(id);
-		if (tr != null) {
-			return ResponseEntity.ok(tr);
-		}
-		return ResponseEntity.notFound().build();
+	@GetMapping("/transacao/{numero}")
+	public ArrayList<Transacao> buscar(@PathVariable Integer numero) {
+		ArrayList<Transacao> tr = service.extrato(numero);
+		return tr;
 	}
 
 	@GetMapping("/transacao")

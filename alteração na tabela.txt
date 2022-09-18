@@ -1,0 +1,1 @@
+ALTER TABLE transacao ADD COLUMN  saldo_depois_da_transacao float NOT NULL  AFTER valor;

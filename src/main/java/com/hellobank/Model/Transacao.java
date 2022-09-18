@@ -35,14 +35,9 @@ public class Transacao {
 	@ManyToOne
 	@JoinColumn(name="tipo_transacao")
 	private TipoTransacao tipoTransacao;
-
-	public TipoTransacao getTipoTransacao() {
-		return tipoTransacao;
-	}
-
-	public void setTipoTransacao(TipoTransacao tipoTransacao) {
-		this.tipoTransacao = tipoTransacao;
-	}
+	
+	@Column(name="saldo_depois_da_transacao")
+	private Float saldoDepoisDaTransacao;
 
 	public Integer getId() {
 		return id;
@@ -83,4 +78,25 @@ public class Transacao {
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
+
+	public TipoTransacao getTipoTransacao() {
+		return tipoTransacao;
+	}
+
+	public void setTipoTransacao(TipoTransacao tipoTransacao) {
+		this.tipoTransacao = tipoTransacao;
+	}
+
+	public Float getSaldoDepoisDaTransacao() {
+		return saldoDepoisDaTransacao;
+	}
+
+	public void setSaldoDepoisDaTransacao(Float saldoDepoisDaTransacao) {
+		this.saldoDepoisDaTransacao = saldoDepoisDaTransacao;
+	}
+
+
+ 
+
+  
 }

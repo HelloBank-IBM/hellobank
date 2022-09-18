@@ -79,27 +79,50 @@ public class ContaServiceImpl implements IContaService {
     }
 
     @Override
-    public Conta depositar(Conta conta, float valor) {
+    public Conta depositar(Conta conta, float valor,Transacao transacao)  {
+        TipoTransacao tipo= new TipoTransacao();
+        tipo=tipoTransacaoDao.buscarNum(1);
+        transacao.setTipoTransacao(tipo);
         if(conta.getId()!=null && conta.getCliente()!=null && conta.getNumeroConta()!=null && conta.getTipo()!=null){
             conta.setSaldo(conta.getSaldo()+valor);
-            
+            transacao.setContaDestino(null);
+            transacao.setContaOrigem(conta);
+            transacao.setData(LocalDate.now(ZoneId.of("UTC")));
+            transacao.setValor(valor);
+            transacao.setSaldoDepoisDaTransacao(conta.getSaldo());
+            transacaoDao.save(transacao);
             return dao.save(conta);
         }
         return null;
     }
 
     @Override
-    public Conta transferencia(Conta contaOrigem, float valor,Conta contaDestino) {
+    public Conta transferencia(Conta contaOrigem, float valor,Conta contaDestino,Transacao transacao) {
+        TipoTransacao tipo= new TipoTransacao();
+        tipo=tipoTransacaoDao.buscarNum(3);
+        transacao.setTipoTransacao(tipo);
         var chequeEspecial =200f;
             if(contaOrigem.getId()!=null && contaOrigem.getCliente()!=null && contaOrigem.getNumeroConta()!=null && contaOrigem.getTipo()!=null){
                 if(contaOrigem.getSaldo()>=0){
                     contaOrigem.setSaldo(contaOrigem.getSaldo()-valor);
                     contaDestino.setSaldo(contaDestino.getSaldo()+valor);
+                    transacao.setContaDestino(contaDestino);
+                    transacao.setContaOrigem(contaOrigem);
+                    transacao.setData(LocalDate.now(ZoneId.of("UTC")));
+                    transacao.setValor(valor);
+                    transacao.setSaldoDepoisDaTransacao(contaOrigem.getSaldo());
+                    transacaoDao.save(transacao);
                     dao.save(contaDestino);
                     return dao.save(contaOrigem);
                 }else if (contaOrigem.getSaldo()+chequeEspecial >= valor && contaOrigem.getTipo().getCodigo()==1){
                         contaOrigem.setSaldo(contaOrigem.getSaldo()-valor);
                         contaDestino.setSaldo(contaDestino.getSaldo()+valor);
+                        transacao.setContaDestino(contaDestino);
+                        transacao.setContaOrigem(contaOrigem);
+                        transacao.setData(LocalDate.now(ZoneId.of("UTC")));
+                        transacao.setValor(valor);
+                        transacao.setSaldoDepoisDaTransacao(contaOrigem.getSaldo());
+                        transacaoDao.save(transacao);
                         dao.save(contaDestino);
                         return dao.save(contaOrigem);
                     }
