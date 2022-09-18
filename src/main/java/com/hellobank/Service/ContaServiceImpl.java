@@ -90,22 +90,18 @@ public class ContaServiceImpl implements IContaService {
 
     @Override
     public Conta transferencia(Conta contaOrigem, float valor, Conta contaDestino) {
-        var chequeEspecial = 200f;
-        if (contaOrigem.getId() != null && contaOrigem.getCliente() != null && contaOrigem.getNumeroConta() != null
-                && contaOrigem.getTipo() != null) {
-            if (contaOrigem.getSaldo() >= 0) {
-                contaOrigem.setSaldo(contaOrigem.getSaldo() - valor);
-                contaDestino.setSaldo(contaDestino.getSaldo() + valor);
-                dao.save(contaDestino);
-                return dao.save(contaOrigem);
-            } else if (contaOrigem.getSaldo() + chequeEspecial >= valor && contaOrigem.getTipo().getCodigo() == 1) {
-                contaOrigem.setSaldo(contaOrigem.getSaldo() - valor);
-                contaDestino.setSaldo(contaDestino.getSaldo() + valor);
-                dao.save(contaDestino);
-                return dao.save(contaOrigem);
+        Float novoSaldo = contaOrigem.getSaldo() - valor;
+        if (novoSaldo < 0) {
+            if (contaOrigem.getTipo().getCodigo() != 1) {
+                return null;
+            } else if (novoSaldo < (-200f)) {
+                return null;
             }
         }
-        return null;
+        contaOrigem.setSaldo(novoSaldo);
+        contaDestino.setSaldo(contaDestino.getSaldo() + valor);
+        dao.save(contaDestino);
+        return dao.save(contaOrigem);
     }
 
     @Override

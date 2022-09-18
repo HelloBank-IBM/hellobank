@@ -82,39 +82,46 @@ public class ContaController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/depositar/{valor}/{numeroConta}")
+    @PutMapping("/depositar/{numeroConta}/{valor}")
     public ResponseEntity<Conta> depositar(@PathVariable float valor, @PathVariable Integer numeroConta) {
 
         Conta aux = service.buscarPeloNumero(numeroConta);
-        Transacao transacao = new Transacao();
-        TransacaoController transacaoController = new TransacaoController();
         Conta res = service.depositar(aux, valor);
         if (res != null) {
+            //método 'salvarTransacao': cria e salva transação no banco de dados com a data atual
+            //Parâmetros: contaOrigem (objeto da Classe Conta), valor (float), idTipoTransacao(integer). 
+            //Para idTipoTransacao: 1 == depósito, 2 == saque, 3 == transferência
+            serviceTransacao.salvarTransacao(aux, valor, 1);
             return ResponseEntity.ok(res);
         }
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/transferencia/{valor}/{numeroOrigem}/{numeroDestino}")
-    public ResponseEntity<Conta> transferencia(@PathVariable float valor, @PathVariable Integer numeroOrigem,
-            @PathVariable Integer numeroDestino) {
+    @PutMapping("/transferencia/{numeroOrigem}/{valor}/{numeroDestino}")
+    public ResponseEntity<Conta> transferencia(@PathVariable float valor, @PathVariable Integer numeroOrigem, @PathVariable Integer numeroDestino) {
 
         Conta auxOrigem = service.buscarPeloNumero(numeroOrigem);
         Conta auxDestino = service.buscarPeloNumero(numeroDestino);
         Conta res = service.transferencia(auxOrigem, valor, auxDestino);
 
         if (res != null) {
+            //método 'salvarTransacao': cria e salva transação no banco de dados com a data atual
+            //Parâmetros: contaOrigem (objeto da Classe Conta), valor (float), idTipoTransacao(integer). 
+            //Para idTipoTransacao: 1 == depósito, 2 == saque, 3 == transferência
+            serviceTransacao.salvarTransacao(auxOrigem, auxDestino, valor, 3);
             return ResponseEntity.ok(res);
         }
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/saque")
-    public ResponseEntity<Conta> saque(Integer numeroConta, Float valor){
+    @PostMapping("/saque/{numeroConta}/{valor}")
+    public ResponseEntity<Conta> saque(@PathVariable Integer numeroConta, @PathVariable Float valor){
         Conta conta = service.buscarPeloNumero(numeroConta); 
         Conta res = service.sacar(conta, valor);
         if (res != null){
-
+            //método 'salvarTransacao': cria e salva transação no banco de dados com a data atual
+            //Parâmetros: contaOrigem (objeto da Classe Conta), valor (float), idTipoTransacao(integer). 
+            //Para idTipoTransacao: 1 == depósito, 2 == saque, 3 == transferência
             serviceTransacao.salvarTransacao(conta, valor, 2);
             return ResponseEntity.ok(res);
         } else {
