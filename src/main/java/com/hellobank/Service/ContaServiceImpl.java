@@ -24,6 +24,7 @@ public class ContaServiceImpl implements IContaService {
     private TransacaoDAO transacaoDao;
     @Autowired
     private TipoTransacaoDAO tipoTransacaoDao;
+
     @Override
     @Transactional
     public Conta criarConta(Conta conta) {
@@ -37,7 +38,7 @@ public class ContaServiceImpl implements IContaService {
     public ArrayList<Conta> buscarContas() {
         ArrayList<Conta> lista;
         lista = (ArrayList<Conta>) dao.findAll();
-        
+
         return lista;
     }
 
@@ -78,44 +79,59 @@ public class ContaServiceImpl implements IContaService {
 
     @Override
     public Conta depositar(Conta conta, float valor) {
-        if(conta.getId()!=null && conta.getCliente()!=null && conta.getNumeroConta()!=null && conta.getTipo()!=null){
-            conta.setSaldo(conta.getSaldo()+valor);
-            
+        if (conta.getId() != null && conta.getCliente() != null && conta.getNumeroConta() != null
+                && conta.getTipo() != null) {
+            conta.setSaldo(conta.getSaldo() + valor);
+
             return dao.save(conta);
         }
         return null;
     }
 
     @Override
-    public Conta transferencia(Conta contaOrigem, float valor,Conta contaDestino) {
-        var chequeEspecial =200f;
-            if(contaOrigem.getId()!=null && contaOrigem.getCliente()!=null && contaOrigem.getNumeroConta()!=null && contaOrigem.getTipo()!=null){
-                if(contaOrigem.getSaldo()>=0){
-                    contaOrigem.setSaldo(contaOrigem.getSaldo()-valor);
-                    contaDestino.setSaldo(contaDestino.getSaldo()+valor);
-                    dao.save(contaDestino);
-                    return dao.save(contaOrigem);
-                }else if (contaOrigem.getSaldo()+chequeEspecial >= valor && contaOrigem.getTipo().getCodigo()==1){
-                        contaOrigem.setSaldo(contaOrigem.getSaldo()-valor);
-                        contaDestino.setSaldo(contaDestino.getSaldo()+valor);
-                        dao.save(contaDestino);
-                        return dao.save(contaOrigem);
-                    }
-                }
-        return null;       
+    public Conta transferencia(Conta contaOrigem, float valor, Conta contaDestino) {
+        var chequeEspecial = 200f;
+        if (contaOrigem.getId() != null && contaOrigem.getCliente() != null && contaOrigem.getNumeroConta() != null
+                && contaOrigem.getTipo() != null) {
+            if (contaOrigem.getSaldo() >= 0) {
+                contaOrigem.setSaldo(contaOrigem.getSaldo() - valor);
+                contaDestino.setSaldo(contaDestino.getSaldo() + valor);
+                dao.save(contaDestino);
+                return dao.save(contaOrigem);
+            } else if (contaOrigem.getSaldo() + chequeEspecial >= valor && contaOrigem.getTipo().getCodigo() == 1) {
+                contaOrigem.setSaldo(contaOrigem.getSaldo() - valor);
+                contaDestino.setSaldo(contaDestino.getSaldo() + valor);
+                dao.save(contaDestino);
+                return dao.save(contaOrigem);
+            }
+        }
+        return null;
     }
 
     @Override
-    public boolean contaExiste(Cliente cliente, TipoConta tipoConta){
+    public boolean contaExiste(Cliente cliente, TipoConta tipoConta) {
         Integer idCliente = cliente.getId();
         Integer idTipoConta = tipoConta.getCodigo();
         Conta contaExiste = dao.encontrarPorClienteETipoConta(idCliente, idTipoConta);
 
-        if (contaExiste != null){
+        if (contaExiste != null) {
             return true;
         } else {
             return false;
         }
     }
 
+    @Override
+    public Conta sacar(Conta conta, Float valor) {
+        Float novoSaldo = conta.getSaldo() - valor;
+        if (novoSaldo < 0) {
+            if (conta.getTipo().getCodigo() != 1) {
+                return null;
+            } else if (novoSaldo < (-200f)) {
+                return null;
+            }
+        }
+        conta.setSaldo(novoSaldo);
+        return dao.save(conta);
+    }
 }

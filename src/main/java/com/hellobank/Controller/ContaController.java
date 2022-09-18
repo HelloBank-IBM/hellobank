@@ -62,25 +62,30 @@ public class ContaController {
         }
     }
 
-    @DeleteMapping("/conta/{id}")
-    public ResponseEntity<Conta> excluirConta(@PathVariable Integer id) {
-        service.excluirConta(id);
-        return ResponseEntity.ok(null);
+    @DeleteMapping("/conta/{numeroConta}")
+    public ResponseEntity<Conta> excluirConta(@PathVariable Integer numeroConta) {
+        Conta conta = service.buscarPeloNumero(numeroConta);
+        if (conta != null){
+            service.excluirConta(conta.getId());
+            return ResponseEntity.ok(null);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
-    @GetMapping("/conta/{id}")
-    public ResponseEntity<Conta> bucarPeloId(@PathVariable Integer id) {
-        Conta res = service.buscarPeloId(id);
+    @GetMapping("/conta/{numeroConta}")
+    public ResponseEntity<Conta> bucarPeloNumeroConta(@PathVariable Integer numeroConta) {
+        Conta res = service.buscarPeloNumero(numeroConta);
         if (res != null) {
             return ResponseEntity.ok(res);
         }
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/depositar/{valor}/{numero}")
-    public ResponseEntity<Conta> depositar(@PathVariable float valor, @PathVariable Integer numero) {
+    @PutMapping("/depositar/{valor}/{numeroConta}")
+    public ResponseEntity<Conta> depositar(@PathVariable float valor, @PathVariable Integer numeroConta) {
 
-        Conta aux = service.buscarPeloNumero(numero);
+        Conta aux = service.buscarPeloNumero(numeroConta);
         Transacao transacao = new Transacao();
         TransacaoController transacaoController = new TransacaoController();
         Conta res = service.depositar(aux, valor);
@@ -102,6 +107,17 @@ public class ContaController {
             return ResponseEntity.ok(res);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/saque")
+    public ResponseEntity<Conta> saque(Integer numeroConta, Float valor){
+        Conta conta = service.buscarPeloNumero(numeroConta); 
+        Conta res = service.sacar(conta, valor);
+        if (res != null){
+            return ResponseEntity.ok(res);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }
