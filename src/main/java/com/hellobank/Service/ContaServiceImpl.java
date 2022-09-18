@@ -1,7 +1,5 @@
 package com.hellobank.Service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,9 +11,9 @@ import org.springframework.stereotype.Service;
 import com.hellobank.DAO.ContaDAO;
 import com.hellobank.DAO.TipoTransacaoDAO;
 import com.hellobank.DAO.TransacaoDAO;
+import com.hellobank.Model.Cliente;
 import com.hellobank.Model.Conta;
-import com.hellobank.Model.TipoTransacao;
-import com.hellobank.Model.Transacao;
+import com.hellobank.Model.TipoConta;
 
 @Service
 public class ContaServiceImpl implements IContaService {
@@ -105,6 +103,19 @@ public class ContaServiceImpl implements IContaService {
                     }
                 }
         return null;       
+    }
+
+    @Override
+    public boolean contaExiste(Cliente cliente, TipoConta tipoConta){
+        Integer idCliente = cliente.getId();
+        Integer idTipoConta = tipoConta.getCodigo();
+        Conta contaExiste = dao.encontrarPorClienteETipoConta(idCliente, idTipoConta);
+
+        if (contaExiste != null){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -12,4 +12,7 @@ public interface ContaDAO extends CrudRepository< Conta, Integer> {
     boolean existsById(Integer id);
     @Query(value="select * from conta where numero_conta=:numero",nativeQuery = true) 
     public Conta buscarNum(Integer numero);
+
+    @Query(value="select * from conta where cliente=:idCliente and tipo_conta=:tipo", nativeQuery = true)
+    public Conta encontrarPorClienteETipoConta(Integer idCliente, Integer tipo);
 }

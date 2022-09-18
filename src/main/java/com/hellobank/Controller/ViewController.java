@@ -44,6 +44,12 @@ public class ViewController {
     }
 
     /* Login no sistema */
+    @GetMapping("/login")
+    public String loginPage(Model model){
+        model.addAttribute("login", new Cliente());
+        return "login";
+    }
+
     @PostMapping("/login")
     public String loginPost(@RequestParam String cpfCnpj, @RequestParam String senha, Model model){
         System.out.println("CPF: " + cpfCnpj + "  |  senha: " + senha);

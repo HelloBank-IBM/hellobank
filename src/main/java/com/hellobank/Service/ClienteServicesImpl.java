@@ -7,14 +7,15 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.hellobank.DAO.ClienteDAO;
 import com.hellobank.Model.Cliente;
+import com.hellobank.Model.Conta;
+import com.hellobank.Model.TipoConta;
 import com.hellobank.Service.exception.CpfCnpjObrigatorioClienteException;
 import com.hellobank.Service.exception.EmailClienteJaCadastradoException;
 import com.hellobank.Service.exception.ObjetoNaoEncontradoException;
-
-import org.springframework.util.StringUtils;
 
 @Service
 public class ClienteServicesImpl implements ICliente {
