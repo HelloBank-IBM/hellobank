@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<!-- HEAD -->
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>HelloBank</title>
+</head>
+
+<!-- NAVBAR DA LANDING PAGE -->
+<nav th:fragment="navbar-index" class="navbar navbar-expand-lg navbar-dark p-5 sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand text-light h4" href="/hellobank/view/index"><strong
+                        class="text-warning">Hello</strong>Bank</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbar">
+                    <ul class="navbar-nav mr-auto ">
+                        <li></li>
+                    </ul>
+                    <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                        <div class="d-flex">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/hellobank/view/index">Início</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/hellobank/view/index">Como Usar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/hellobank/view/index">Sobre o Projeto</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/HelloBank-IBM/hellobank"
+                                    target="_blank">GitHub</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-outline-warning" href="/hellobank/view/login">Login</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+    <!-- NAVBAR DO SISTEMA -->
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark p-5 sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light h4" href="#"><strong
+                    class="text-warning">Hello</strong>Bank</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbar">
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                    <li></li>
+                </ul>
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                    <div class="d-flex">
+                        <li>
+                            <p class="navbar-text mx-4"> Bem-vindo, <strong  th:text="${cliente.nome}"></strong></p>
+                        </li>
+                        <li>
+                            <a class="btn btn-outline-warning" href="/hellobank/view/login">Sair</a>
+                        </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MENU DO SISTEMA -->
+    <div th:fragment="menu" class="row align-items-start align-content-center justify-content-center m-4 p-4">
+        <a class="col-1 menu-options btn btn-outline-dark" href="saldo.html"> <i class="fa-solid fa-sack-dollar menu-icon-lg"></i> Saldo </a>
+        <a class="col-1 menu-options btn btn-outline-dark" href="deposito.html"> <i class="fa-solid fa-money-bill-1-wave menu-icon-lg"></i> Depósito </a>
+        <a class="col-1 menu-options btn btn-outline-dark" href="extrato.html"> <i class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
+        <a class="col-1 menu-options btn btn-outline-dark" href="saque.html"> <i class="fa-solid fa-hand-holding-dollar menu-icon-lg"></i> Saque </a>
+        <a class="col-1 menu-options btn btn-outline-dark" href="transferencia.html"> <i class="fa-solid fa-money-bill-transfer menu-icon-lg"></i> Transferir </a>
+        <a class="col-1 menu-options btn btn-outline-dark" href="nova_conta.html"> <i class="fa-solid fa-square-plus menu-icon-lg"></i> <span style="font-size: 0.9em">Nova Conta</span> </a>
+        <a class="col-1 menu-options btn btn-outline-dark" href="#"> <i class="fa-solid fa-id-card menu-icon-lg"></i> Meus dados </a>
+    </div>
+
+    <!-- FOOTER DA LANDING PAGE -->
+    <footer th:fragment="footer-index">
+        <div class="container footer mt-5 mb-0 pb-0">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Início</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Como Usar</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Sobre o projeto</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">GitHub</a></li>
+            </ul>
+            <p class="text-center text-muted">2022 - If Black Then Code, Grupo 2</p>
+        </div>
+    </footer>
+
+    <!-- FOOTER DE LOGIN E CADASTRO -->
+    <footer th:fragment="footer-login">
+        <div class="footer-divider"></div>
+        <div class="container footer mt-5 mb-0 pb-0">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Início</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Como Usar</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Sobre o projeto</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-light">GitHub</a></li>
+            </ul>
+            <p class="text-center text-light">2022 - If Black Then Code, Grupo 2</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <div th:fragment="scripts">
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+            integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+            crossorigin="anonymous"></script>
+    </div>

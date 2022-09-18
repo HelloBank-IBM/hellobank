@@ -63,9 +63,4 @@ public class ClienteController {
 		
 		return ResponseEntity.badRequest().build();
 	}
-
-	@GetMapping("/cliente/busca")
-	public ArrayList<Cliente> buscarCpf(@RequestParam (name="cpf") String cpf){
-		return service.buscarPeloCpf(cpf);
-	}
 }
