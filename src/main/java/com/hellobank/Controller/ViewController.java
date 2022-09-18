@@ -56,7 +56,7 @@ public class ViewController {
         System.out.println("Registro: \n CPF : " + cpfCnpj + " | Senha: " + senha);
         if ((cliente != null) && (cliente.getSenha().equals(senha))){
             model.addAttribute("cliente", cliente);
-            return "redirect:/hellobank/view/inicio";
+            return "inicio";
         } else {
         model.addAttribute("login", new Cliente());
         return "login";
