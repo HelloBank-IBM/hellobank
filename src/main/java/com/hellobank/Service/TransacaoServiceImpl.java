@@ -1,12 +1,14 @@
 package com.hellobank.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hellobank.DAO.TipoTransacaoDAO;
 import com.hellobank.DAO.TransacaoDAO;
+import com.hellobank.Model.Conta;
 import com.hellobank.Model.Transacao;
 
 @Service
@@ -14,6 +16,9 @@ public class TransacaoServiceImpl   implements ITransacaoService{
 	
 	@Autowired
 	private TransacaoDAO dao;
+
+	@Autowired
+	private TipoTransacaoDAO tipoTransacaoDao;
 	
     @Override
 	public Transacao buscar(Integer id) {
@@ -30,4 +35,33 @@ public class TransacaoServiceImpl   implements ITransacaoService{
 		return (ArrayList<Transacao>)dao.findAll();
 	
 	}
+
+	@Override
+	public Transacao salvarTransacao(Conta contaOrigem, Conta contaDestino, Float valor, Integer idTipoTransacao){
+		Transacao transacao = new Transacao();
+		LocalDate data = LocalDate.now();
+
+		transacao.setContaOrigem(contaOrigem);
+		transacao.setContaDestino(contaDestino);
+		transacao.setTipoTransacao(tipoTransacaoDao.findById(idTipoTransacao).get());
+		transacao.setValor(valor);
+		transacao.setData(data);
+
+		return dao.save(transacao);
+	}
+
+	@Override
+	public Transacao salvarTransacao(Conta contaOrigem, Float valor, Integer idTipoTransacao){
+		Transacao transacao = new Transacao();
+		LocalDate data = LocalDate.now();
+
+		transacao.setContaOrigem(contaOrigem);
+		transacao.setTipoTransacao(tipoTransacaoDao.findById(idTipoTransacao).get());
+		transacao.setValor(valor);
+		transacao.setData(data);
+
+		return dao.save(transacao);
+	}
+
+
 }
