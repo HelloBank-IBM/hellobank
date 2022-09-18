@@ -8,7 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.hellobank.Model.Cliente;
 
 public interface ClienteDAO extends CrudRepository<Cliente,Integer> {
-    public Optional<Cliente> findByEmail(String email);
 
     @Query(value="select CASE WHEN count(1) > 0 THEN 'true' ELSE 'false' END  from cliente where email = :email",  nativeQuery = true)
     public boolean emailExiste(String email);
@@ -19,4 +18,5 @@ public interface ClienteDAO extends CrudRepository<Cliente,Integer> {
 
     @Query(value="select c from cliente c where c.cpfCnpj = ?1", nativeQuery = true)
     public Cliente encontrarPorCpf(String cpf);
+    public Optional<Cliente> findByEmail(String cpf);
 }

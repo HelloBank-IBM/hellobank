@@ -67,10 +67,10 @@
                 <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                     <div class="d-flex">
                         <li>
-                            <p class="navbar-text mx-4"> Bem-vindo, <strong>Nome de Usuário</strong></p>
+                            <p class="navbar-text mx-4"> Bem-vindo, <strong  th:text="${cliente.nome}"></strong></p>
                         </li>
                         <li>
-                            <a class="btn btn-outline-warning" href="login.html">Sair</a>
+                            <a class="btn btn-outline-warning" href="/hellobank/view/login">Sair</a>
                         </li>
                 </ul>
             </div>
@@ -78,7 +78,7 @@
     </nav>
 
     <!-- MENU DO SISTEMA -->
-    <div th:fragment="sidebar" class="row align-items-start align-content-center justify-content-center m-4 p-4">
+    <div th:fragment="menu" class="row align-items-start align-content-center justify-content-center m-4 p-4">
         <a class="col-1 menu-options btn btn-outline-dark" href="saldo.html"> <i class="fa-solid fa-sack-dollar menu-icon-lg"></i> Saldo </a>
         <a class="col-1 menu-options btn btn-outline-dark" href="deposito.html"> <i class="fa-solid fa-money-bill-1-wave menu-icon-lg"></i> Depósito </a>
         <a class="col-1 menu-options btn btn-outline-dark" href="extrato.html"> <i class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>

@@ -83,11 +83,13 @@ public class ClienteServicesImpl implements ICliente {
 
     @Override
     public Cliente buscarPeloCpf(String cpf){
-        Cliente cliente = dao.encontrarPorCpf(cpf);
-        if (cliente != null) {
-            return cliente;
-        } else {
-            return null;
-        }
+        Cliente cliente = dao.findByCpfCnpj(cpf);
+        return cliente;
+    }
+
+    @Override
+    public Cliente buscarPeloEmail(String email){
+        Optional<Cliente> cliente = dao.findByEmail(email);
+        return cliente.orElse(null);
     }
 }

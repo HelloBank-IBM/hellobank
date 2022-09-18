@@ -13,5 +13,6 @@ public interface ICliente {
     public Cliente buscarPeloId(Integer id);
     public void excluir(Integer id);
     public Cliente buscarPeloCpf(String cpf);
+    public Cliente buscarPeloEmail(String email);
 
 }

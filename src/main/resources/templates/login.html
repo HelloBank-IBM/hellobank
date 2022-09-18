@@ -20,15 +20,15 @@
             </div>
             <div class="row justify-content-center form-container">
                 <div class="">
-                    <form th:action="@{/hellobank/view/login}" method="post">
+                    <form th:action="@{/hellobank/view/login}" th:object="${login}" method="post">
                             <div class="form-floating mb-3">
-                                <input th:object="${cpfCnpj}" type="text" class="form-control" id="cpfCnpj"
+                                <input th:field="*{cpfCnpj}" type="text" class="form-control" id="cpfCnpj"
                                     placeholder="000.000.000-00">
                                 <label for="cpfCnpj">CPF ou CNPJ</label>
                             </div>
                             <div class="form-floating">
-                                <input th:object="${senha}" type="password" class="form-control" id="senha"
-                                    placeholder="Password">
+                                <input th:field="*{senha}" type="password" class="form-control" id="senha"
+                                    placeholder="Senha">
                                 <label for="senha">Senha</label>
                             </div>
                             <input type="submit" class="btn btn-lg btn-login" value="Acessar">
