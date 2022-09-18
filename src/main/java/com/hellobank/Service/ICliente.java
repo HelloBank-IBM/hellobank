@@ -4,6 +4,7 @@ package com.hellobank.Service;
 import java.util.ArrayList;
 
 import com.hellobank.Model.Cliente;
+import com.hellobank.Model.TipoConta;
 
 public interface ICliente {
     

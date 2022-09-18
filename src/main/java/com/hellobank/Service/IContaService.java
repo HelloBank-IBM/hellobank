@@ -2,7 +2,9 @@ package com.hellobank.Service;
 
 import java.util.ArrayList;
 
+import com.hellobank.Model.Cliente;
 import com.hellobank.Model.Conta;
+import com.hellobank.Model.TipoConta;
 
 public interface IContaService {
     
@@ -14,5 +16,5 @@ public interface IContaService {
     public Integer criarNumeroConta(Conta conta);
     public Conta depositar(Conta conta, float valor);
     public Conta transferencia(Conta conta, float valor,Conta contaDestino);
-
+    public boolean contaExiste(Cliente cliente, TipoConta tipoConta); 
 }
