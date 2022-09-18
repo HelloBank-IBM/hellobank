@@ -38,17 +38,12 @@ public class ViewController {
         return "landing_page";
     }
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("login", new Cliente ());
-        return "login";
-    }
-
     @GetMapping("/inicio")
     public String inicio(Cliente cliente, Model model){
         return "inicio";
     }
 
+    /* Login no sistema */
     @PostMapping("/login")
     public String loginPost(@RequestParam String cpfCnpj, @RequestParam String senha, Model model){
         System.out.println("CPF: " + cpfCnpj + "  |  senha: " + senha);
@@ -104,8 +99,5 @@ public class ViewController {
         } 
         return "form_cadastro";
     }
-
-    /* Login no sistema */
-
 
 }
