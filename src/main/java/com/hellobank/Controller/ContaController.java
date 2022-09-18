@@ -114,6 +114,8 @@ public class ContaController {
         Conta conta = service.buscarPeloNumero(numeroConta); 
         Conta res = service.sacar(conta, valor);
         if (res != null){
+
+            serviceTransacao.salvarTransacao(conta, valor, 2);
             return ResponseEntity.ok(res);
         } else {
             return ResponseEntity.badRequest().build();
