@@ -1,5 +1,7 @@
 package com.hellobank.Controller;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +14,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hellobank.DAO.TipoTransacaoDAO;
 import com.hellobank.Model.Conta;
+import com.hellobank.Model.Transacao;
 import com.hellobank.Service.ContaServiceImpl;
+import com.hellobank.Service.TransacaoServiceImpl;
 @RestController
 public class ContaController {
 
     @Autowired
     private  ContaServiceImpl service;
+    
+    @Autowired
+    private  TransacaoServiceImpl serviceTransacao;
     
 
     @GetMapping("/conta")
@@ -60,11 +68,27 @@ public class ContaController {
     }
     @PutMapping("/depositar/{valor}/{numero}")
     public ResponseEntity<Conta> depositar(@PathVariable float valor,@PathVariable Integer numero){
+       
         Conta aux=service.buscarPeloNumero(numero);
+        Transacao transacao = new Transacao();
+        TransacaoController transacaoController = new TransacaoController();
         Conta res=service.depositar(aux, valor);
 		if (res!=null) {
 			return ResponseEntity.ok(res);
 		}
         return ResponseEntity.notFound().build();
     }
+    @PutMapping("/transferencia/{valor}/{numeroOrigem}/{numeroDestino}")
+    public ResponseEntity<Conta> transferencia(@PathVariable float valor,@PathVariable Integer numeroOrigem,@PathVariable Integer numeroDestino){
+        
+        Conta auxOrigem=service.buscarPeloNumero(numeroOrigem);
+        Conta auxDestino=service.buscarPeloNumero(numeroDestino);
+        Conta res=service.transferencia(auxOrigem, valor, auxDestino);
+        
+		if (res!=null) {
+			return ResponseEntity.ok(res);
+		}
+        return ResponseEntity.notFound().build();
+    }
+    
 }
