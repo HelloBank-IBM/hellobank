@@ -19,7 +19,7 @@
                         data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
                         Menu
                     </button>
-                    <a class="col-lg-1 btn btn-md btn-light mx-auto" href="/hellobank/inicio">
+                    <a class="col-lg-1 btn btn-md btn-light mx-auto" th:href="@{/hellobank/view/inicio/{idCliente}(idCliente=${cliente.id})}">
                         Início
                     </a>
                     <div class="offcanvas offcanvas-start menu-offcanvas" data-bs-backdrop="static" tabindex="-1"
@@ -31,19 +31,26 @@
                         </div>
                         <div class="offcanvas-body">
                             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/saldo/{idCliente}(idCliente=${cliente.id})}"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/saldo/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-sack-dollar menu-icon-lg"></i> Saldo </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/extrato/{idCliente}(idCliente=${cliente.id})}"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/extrato/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/saque/{idCliente}(idCliente=${cliente.id})}"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/saque/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-hand-holding-dollar menu-icon-lg"></i> Saque </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/transferencia/{idCliente}(idCliente=${cliente.id})}"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/transferencia/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-money-bill-transfer menu-icon-lg"></i> Transferir </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/nova_conta/{idCliente}(idCliente=${cliente.id})}"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/nova_conta/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-square-plus menu-icon-lg"></i> <span>Nova Conta</span> </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/deposito/{idCliente}(idCliente=${cliente.id})}"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/deposito/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-money-bill-1-wave menu-icon-lg"></i> Depósito </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/config_dados/{idCliente}(idCliente=${cliente.id})}"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/config_dados/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-id-card menu-icon-lg"></i> Meus dados </a>
                             </div>
                         </div>
@@ -55,11 +62,14 @@
                         <h4 style="color: var(--bs-gray-700)"><b>Saldo</b> - Minhas Contas </h4>
                     </div>
                     <div class="row" style="display: flex; justify-content: center">
-                        <div th:each="conta : ${contas}" class="col" style="max-width: 20rem; min-width: 15rem; margin-left: 5px;">
+                        <div th:each="conta : ${contas}" class="col"
+                            style="max-width: 20rem; min-width: 15rem; margin-left: 5px;">
                             <div class="card bg-secondary mb-3 border-info">
                                 <div class="card-header bg-info text-light">
-                                    <b style="margin-right: 2%">Conta <span th:text="${{conta.tipo.nome}}"></span></b> 
-                                    <a class="btn btn-info border-primary" th:href="@{/hellobank/view/extrato/{idConta}(idConta=${conta.id})}" style="margin-right: auto">Extrato</a>
+                                    <b style="margin-right: 2%">Conta <span th:text="${{conta.tipo.nome}}"></span></b>
+                                    <a class="btn btn-info border-primary"
+                                        th:href="@{/hellobank/view/extrato/{numeroConta}(numeroConta=${conta.numeroConta})}"
+                                        style="margin-right: auto">Extrato</a>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text"> Número: <span th:text="${{conta.numeroConta}}"></span></p>
@@ -78,9 +88,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <div th:replace="~{partials :: scripts}"></div>
 </body>
 
