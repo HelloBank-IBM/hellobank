@@ -13,5 +13,6 @@ public interface ITransacaoService {
 	public ArrayList<Transacao> listar();
 	public Transacao salvarTransacao(Conta contaOrigem, Float valor, Integer idTipoTransacao);
 	public Transacao salvarTransacao(Conta contaOrigem, Conta contaDestino, Float valor, Integer idTipoTransacao);
+	public ArrayList<Transacao> extrato(Integer idConta);
 
 }

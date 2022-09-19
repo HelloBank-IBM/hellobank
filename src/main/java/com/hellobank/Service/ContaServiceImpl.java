@@ -130,4 +130,9 @@ public class ContaServiceImpl implements IContaService {
         conta.setSaldo(novoSaldo);
         return dao.save(conta);
     }
+
+    @Override
+    public ArrayList<Conta> buscarPeloIdCliente(Integer idCliente) {
+        return (ArrayList<Conta>)dao.buscarPorIdCliente(idCliente);
+    }
 }

@@ -129,4 +129,11 @@ public class ContaController {
         }
     }
 
+    @PostMapping("/extrato/{numeroConta}")
+    public ArrayList<Transacao> extrato(@PathVariable Integer numeroConta){
+        Conta conta = service.buscarPeloNumero(numeroConta);
+        ArrayList<Transacao> listaTransacao = serviceTransacao.extrato(conta.getId());
+        return listaTransacao;
+    }
+
 }

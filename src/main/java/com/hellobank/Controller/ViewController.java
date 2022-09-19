@@ -1,10 +1,13 @@
 package com.hellobank.Controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -104,6 +107,15 @@ public class ViewController {
             return "redirect:/hellobank/view/login";
         } 
         return "form_cadastro";
+    }
+
+    @GetMapping("/saldo/{idCliente}")
+    public String saldoGet(@PathVariable Integer idCliente, Model model){
+        ArrayList<Conta> contas = contaService.buscarPeloIdCliente(idCliente);
+        Cliente cliente = clienteService.buscarPeloId(idCliente);
+        model.addAttribute("contas", contas);
+        model.addAttribute("cliente", cliente);
+        return "saldo";
     }
 
 }
