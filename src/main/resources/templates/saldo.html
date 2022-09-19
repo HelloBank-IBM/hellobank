@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <div th:fragment="sidebar" class="container px-lg-5">
+        <div class="container px-lg-5">
             <div class="row align-items-start align-content-center justify-content-center m-3">
                 <div class="container justify-content-center mb-3">
                     <button class="btn btn-md btn-light col-lg-1 mx-auto" type="button" data-bs-toggle="offcanvas"
@@ -31,57 +31,57 @@
                         </div>
                         <div class="offcanvas-body">
                             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="saldo.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/saldo/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-sack-dollar menu-icon-lg"></i> Saldo </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="extrato.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/extrato/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="saque.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/saque/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-hand-holding-dollar menu-icon-lg"></i> Saque </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="transferencia.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/transferencia/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-money-bill-transfer menu-icon-lg"></i> Transferir </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="nova_conta.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/nova_conta/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-square-plus menu-icon-lg"></i> <span>Nova Conta</span> </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="deposito.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/deposito/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-money-bill-1-wave menu-icon-lg"></i> Depósito </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="config_dados.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning" th:href="@{/hellobank/view/config_dados/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-id-card menu-icon-lg"></i> Meus dados </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="container justify-content-center border p-3 rounded-4 ">
-
-                    <form class="m-1">
-                        <legend><b>Saldo</b> - Minhas Contas </legend>
-                        <div class="accordion" id="accordionExample">
-                            <div th:each="conta : ${contas}" class="accordion-item">
-                              <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                  Accordion Item #1
-                                </button>
-                              </h2>
-                              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
-                                <div class="accordion-body">
-                                  <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <div class="container justify-content-center border p-3 rounded-4">
+                    <div class="m-2">
+                        <h4 style="color: var(--bs-gray-700)"><b>Saldo</b> - Minhas Contas </h4>
+                    </div>
+                    <div class="row" style="display: flex; justify-content: center">
+                        <div th:each="conta : ${contas}" class="col" style="max-width: 20rem; min-width: 15rem; margin-left: 5px;">
+                            <div class="card bg-secondary mb-3 border-info">
+                                <div class="card-header bg-info text-light">
+                                    <b style="margin-right: 2%">Conta <span th:text="${{conta.tipo.nome}}"></span></b> 
+                                    <a class="btn btn-info border-primary" th:href="@{/hellobank/view/extrato/{idConta}(idConta=${conta.id})}" style="margin-right: auto">Extrato</a>
                                 </div>
-                              </div>
+                                <div class="card-body">
+                                    <p class="card-text"> Número: <span th:text="${{conta.numeroConta}}"></span></p>
+                                    <div class="input-group m-1">
+                                        <span class="input-group-text">R$</span>
+                                        <input type="text" class="form-control" th:value="${{conta.saldo}}" readonly>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                    </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-5 mb-0 pb-0 pt-5">
+                    <p class="text-center text-muted border-bottom m-1">Grupo 2</p>
+                    <p class="text-center text-muted m-1">2022 - If Black Then Code</p>
                 </div>
             </div>
-            <div class="container mt-5 mb-0 pb-0 pt-5">
-                <p class="text-center text-muted border-bottom m-1">Grupo 2</p>
-                <p class="text-center text-muted m-1">2022 - If Black Then Code</p>
-            </div>
         </div>
-        
-    </div>
-    
 
 
-    <div th:replace="~{partials :: scripts}"></div>
+
+        <div th:replace="~{partials :: scripts}"></div>
 </body>
 
 </html>
