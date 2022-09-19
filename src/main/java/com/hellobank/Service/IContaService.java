@@ -18,4 +18,5 @@ public interface IContaService {
     public Conta transferencia(Conta conta, float valor,Conta contaDestino);
     public boolean contaExiste(Cliente cliente, TipoConta tipoConta); 
     public Conta sacar(Conta conta, Float valor);
+    public ArrayList<Conta> buscarPeloIdCliente(Integer idCliente);
 }

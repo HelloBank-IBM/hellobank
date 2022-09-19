@@ -63,5 +63,7 @@ public class TransacaoServiceImpl   implements ITransacaoService{
 		return dao.save(transacao);
 	}
 
-
+	public ArrayList<Transacao> extrato(Integer idConta){
+		return dao.extrato(idConta);
+	}
 }

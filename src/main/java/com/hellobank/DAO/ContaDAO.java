@@ -15,4 +15,7 @@ public interface ContaDAO extends CrudRepository< Conta, Integer> {
 
     @Query(value="select * from conta where cliente=:idCliente and tipo_conta=:tipo", nativeQuery = true)
     public Conta encontrarPorClienteETipoConta(Integer idCliente, Integer tipo);
+
+    @Query(value="select * from conta where cliente =:idCliente", nativeQuery = true)
+    public ArrayList<Conta> buscarPorIdCliente(Integer idCliente);
 }
