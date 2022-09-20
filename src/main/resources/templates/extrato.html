@@ -19,7 +19,8 @@
                         data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
                         Menu
                     </button>
-                    <a class="col-lg-1 btn btn-md btn-light mx-auto" th:href="@{/hellobank/view/inicio/{idCliente}(idCliente=${cliente.id})}">
+                    <a class="col-lg-1 btn btn-md btn-light mx-auto"
+                        th:href="@{/hellobank/view/inicio/{idCliente}(idCliente=${cliente.id})}">
                         Início
                     </a>
                     <div class="offcanvas offcanvas-start menu-offcanvas" data-bs-backdrop="static" tabindex="-1"
@@ -35,8 +36,8 @@
                                     th:href="@{/hellobank/view/saldo/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-sack-dollar menu-icon-lg"></i> Saldo </a>
                                 <a class="col-1 menu-options-sm btn btn-outline-warning"
-                                    th:href="@{/hellobank/view/extrato/cliente/{idCliente}(idCliente=${cliente.id})}"> <i
-                                        class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
+                                    th:href="@{/hellobank/view/extrato/cliente/{idCliente}(idCliente=${cliente.id})}">
+                                    <i class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
                                 <a class="col-1 menu-options-sm btn btn-outline-warning"
                                     th:href="@{/hellobank/view/saque/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-hand-holding-dollar menu-icon-lg"></i> Saque </a>
@@ -59,7 +60,8 @@
 
                 <div class="container justify-content-center border p-3 rounded-4 ">
 
-                    <form th:action="@{/hellobank/view/extrato}" method="post" th:object="${formConta}" class="mb-3 p-3 border-bottom">
+                    <form th:action="@{/hellobank/view/extrato}" method="post" th:object="${formConta}"
+                        class="mb-3 p-3 border-bottom">
                         <legend> <b>Extrato</b> - Selecione a conta desejada </h4>
                         </legend>
                         <div class="row">
@@ -73,43 +75,45 @@
                                 </div>
                             </div>
                         </div>
-                </div>
-                </form>
+                    </form>
 
-                <table class="table table-hover table-striped" style="font-size: 0.8em">
-                    <thead>
-                        <tr class="table-warning">
-                            <th>Conta Nº: <b th:text="${{conta.numeroConta}}"></b></th>
-                            <th>Tipo: <b th:text="${{conta.tipo.nome}}"></b></th>
-                            <th colspan="2"></th>
-                        </tr>
-                        <tr class="table-dark" style="font-size: 0.8em">
-                            <th scope="col">Transação</th>
-                            <th scope="col">Data</th>
-                            <th scope="col">Valor</th>
-                            <th scope="col">Destino</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="transacao : ${transacoes}">
-                            <th scope="row" th:text="${{transacao.tipoTransacao.nome}}"></th>
-                            <td th:text="${{transacao.data}}"></td>
-                            <td>R$ <span th:text="${{transacao.valor}}"></span></td>
-                            <td>
-                                <span th:if="${{transacao.contaDestino != null}}"
-                                    th:text="${{transacao.contaDestino.numeroConta}}"></span>
-                            </td>
-                        </tr>
-                        <tr th:if="${transacoes.isEmpty()} == true">
-                            <td class="text-center text-danger" colspan="4">Não registros de transações para esta conta.</td>
-                        </tr>
-                    </tbody>
-                </table>
+
+                    <table class="table table-hover table-striped" style="font-size: 0.8em">
+                        <thead>
+                            <tr class="table-warning">
+                                <th>Conta Nº: <b th:text="${{conta.numeroConta}}"></b></th>
+                                <th>Tipo: <b th:text="${{conta.tipo.nome}}"></b></th>
+                                <th colspan="2"></th>
+                            </tr>
+                            <tr class="table-dark" style="font-size: 0.8em">
+                                <th scope="col">Transação</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Destino</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="transacao : ${transacoes}">
+                                <th scope="row" th:text="${{transacao.tipoTransacao.nome}}"></th>
+                                <td th:text="${{transacao.data}}"></td>
+                                <td>R$ <span th:text="${{transacao.valor}}"></span></td>
+                                <td>
+                                    <span th:if="${{transacao.contaDestino != null}}"
+                                        th:text="${{transacao.contaDestino.numeroConta}}"></span>
+                                </td>
+                            </tr>
+                            <tr th:if="${transacoes.isEmpty()} == true">
+                                <td class="text-center text-danger" colspan="4">Não registros de transações para esta
+                                    conta.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="container mt-5 mb-0 pb-0 pt-5">
-            <p class="text-center text-muted border-bottom m-1">Grupo 2</p>
-            <p class="text-center text-muted m-1">2022 - If Black Then Code</p>
+            <div class="container mt-5 mb-0 pb-0 pt-5">
+                <p class="text-center text-muted border-bottom m-1">Grupo 2</p>
+                <p class="text-center text-muted m-1">2022 - If Black Then Code</p>
+            </div>
         </div>
     </div>
     </div>

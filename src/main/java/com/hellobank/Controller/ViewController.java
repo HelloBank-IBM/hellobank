@@ -283,4 +283,46 @@ public class ViewController {
             return "deposito";
         }
     }
+
+    /* Formulário para nova conta */
+    @GetMapping("/nova_conta/{idCliente}")
+    public String novaContaGet(@PathVariable Integer idCliente, Model model) {
+        Cliente cliente = clienteService.buscarPeloId(idCliente);
+        ArrayList<Conta> contas = contaService.buscarPeloIdCliente(cliente.getId());
+        ArrayList<TipoConta> tipos = (ArrayList<TipoConta>) tipoContaDao.findAll();
+        ArrayList<TipoConta> tiposDisponiveis = new ArrayList<TipoConta>();
+        for (TipoConta t : tipos) {
+            if (contaService.contaExiste(cliente, t) == false) {
+                tiposDisponiveis.add(t);
+            }
+        }
+        model.addAttribute("tiposDisponiveis", tiposDisponiveis);
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("formConta", new Conta());
+
+        return "nova_conta";
+    }
+
+    @PostMapping("/nova_conta/{idCliente}")
+    public String novaContaPost(@PathVariable Integer idCliente, Conta formConta, Model model) {
+        Cliente cliente = clienteService.buscarPeloId(idCliente);
+        TipoConta tipoConta = formConta.getTipo();
+        formConta.setCliente(cliente);
+        Boolean contaExiste = contaService.contaExiste(cliente, tipoConta);
+        if (contaExiste == false) {
+            // Criando e preenchendo o númeroConta da conta
+            var numeroConta = contaService.criarNumeroConta(formConta);
+            formConta.setNumeroConta(numeroConta);
+            // Verificando se o cliente existe no banco de dados e se o tipo conta está
+            // preenchido;
+            contaService.criarConta(formConta);
+            Conta res = contaService.buscarPeloNumero(formConta.getNumeroConta());
+            if (res != null) {
+                return "redirect://localhost:8080/hellobank/view/saldo/" + idCliente;
+            }
+        }
+        return "redirect://localhost:8080/hellobank/view/nova_conta/" + idCliente;
+    }
+
+    /* CRUD - Create conta */
 }
