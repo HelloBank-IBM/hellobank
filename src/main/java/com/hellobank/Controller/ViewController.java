@@ -335,8 +335,17 @@ public class ViewController {
 
     @PostMapping("/config_dados/{idCliente}")
     public String configDadosPost(@PathVariable Integer idCliente, Cliente cliente, Model model){
-        clienteService.atualizar(cliente);
-        model.addAttribute("cliente", cliente);
+        Cliente atualizado = clienteService.buscarPeloId(idCliente);
+        atualizado.setContato(cliente.getContato());
+        atualizado.setCpfCnpj(cliente.getCpfCnpj());
+        atualizado.setEmail(cliente.getEmail());
+        atualizado.setEndereco(cliente.getEndereco());
+        atualizado.setNome(cliente.getNome());
+        atualizado.setSenha(cliente.getSenha());
+
+        clienteService.atualizar(atualizado);
+
+        model.addAttribute("cliente", atualizado);
 
         return "redirect://localhost:8080/hellobank/view/config_dados/" + idCliente;
     }

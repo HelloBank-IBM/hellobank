@@ -26,6 +26,6 @@ public interface ClienteDAO extends JpaRepository<Cliente,Integer> {
 
     @Transactional
     @Modifying(flushAutomatically = true,clearAutomatically = true)
-    @Query(value="update cliente c set c.nome = :inome, c.email = :iemail, c.senha = :isenha, c.endereco = :iendereco, c.contato = :icontato where c.idCliente = :idCliente", nativeQuery=true)
+    @Query(value="update cliente c set c.nome = :inome, c.email = :iemail, c.senha = :isenha, c.endereco = :iendereco, c.contato = :icontato where c.id_cliente = :idCliente", nativeQuery=true)
     public void atualizar(@Param("inome")String inome, @Param("iemail")String iemail, @Param("isenha")String isenha, @Param("iendereco")String iendereco,@Param("icontato") String icontato, @Param("idCliente")Integer idCliente);
 }

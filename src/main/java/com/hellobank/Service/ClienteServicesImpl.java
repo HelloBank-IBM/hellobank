@@ -58,16 +58,7 @@ public class ClienteServicesImpl implements ICliente {
     @Override
     public Cliente atualizarDados(Cliente cliente) {
         Optional<Cliente> clienteExistente = dao.findByEmail(cliente.getEmail());
-        if (clienteExistente.isPresent() && !clienteExistente.get().equals(cliente)) {
-			throw new EmailClienteJaCadastradoException("E-mail já cadastrado");
-		}
-        if(cliente.isNovo() && !StringUtils.hasLength(cliente.getCpfCnpj())){
-            throw new CpfCnpjObrigatorioClienteException("Cpf/CNPJ é obrigatória para novo cliente");
-        }
-        if(cliente.isNovo() && !StringUtils.hasLength(cliente.getSenha())){
-            throw new CpfCnpjObrigatorioClienteException("Senha é obrigatória para novo cliente");
-        }
-        if(cliente.getId()!=null && cliente.getNome()!=null && cliente.getCpfCnpj()!=null) {
+        if(cliente.getId()!=null && cliente.getNome()!=null && cliente.getCpfCnpj()!=null && cliente.getEmail() != null) {
 			return dao.save(cliente);
 		}
 		return null;
@@ -99,15 +90,18 @@ public class ClienteServicesImpl implements ICliente {
     @Override
     @Transactional
     public void atualizar(Cliente cliente){
-        String inome = cliente.getNome();
+        /*String inome = cliente.getNome();
         String iemail = cliente.getEmail();
         String isenha = cliente.getSenha();
         String iendereco = cliente.getEndereco();
         String icontato = cliente.getContato();
-        Integer idCliente = cliente.getId();
+        Integer idCliente = cliente.getId();*/
         //String query = "UPDATE cliente (nome, email, senha, endereco, contato) values (" + inome + ","+ iemail + ", " +isenha+", " + iendereco + ", " + icontato +" WHERE id_cliente = " + idCliente + ";";
         //dao.atualizar(inome, iemail, isenha, iendereco, icontato, idCliente);
         //dao.atualizar(inome, iemail, isenha, iendereco, icontato, idCliente);*/
-        dao.save(cliente);
+        if(cliente.getId()!=null && cliente.getNome()!=null && cliente.getCpfCnpj()!=null) {
+		dao.save(cliente);
+		}
+    
     }
 }
