@@ -1,5 +1,6 @@
 package com.hellobank.Controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class ViewController {
 
     /* Tela inicial da Aplicação */
     @GetMapping("/inicio/{idCliente}")
-    public String inicio(@PathVariable Integer idCliente, Model model){
+    public String inicio(@PathVariable Integer idCliente, Model model) {
         Cliente cliente = clienteService.buscarPeloId(idCliente);
         model.addAttribute("cliente", cliente);
         return "inicio";
@@ -52,22 +53,22 @@ public class ViewController {
 
     /* Login no sistema */
     @GetMapping("/login")
-    public String loginPage(Model model){
+    public String loginPage(Model model) {
         model.addAttribute("login", new Cliente());
         return "login";
     }
 
     @PostMapping("/login")
-    public String loginPost(@RequestParam String cpfCnpj, @RequestParam String senha, Model model){
+    public String loginPost(@RequestParam String cpfCnpj, @RequestParam String senha, Model model) {
         System.out.println("CPF: " + cpfCnpj + "  |  senha: " + senha);
         Cliente cliente = clienteService.buscarPeloCpf(cpfCnpj);
         System.out.println("Registro: \n CPF : " + cpfCnpj + " | Senha: " + senha);
-        if ((cliente != null) && (cliente.getSenha().equals(senha))){
+        if ((cliente != null) && (cliente.getSenha().equals(senha))) {
             model.addAttribute("cliente", cliente);
             return "inicio";
         } else {
-        model.addAttribute("login", new Cliente());
-        return "login";
+            model.addAttribute("login", new Cliente());
+            return "login";
         }
     }
 
@@ -83,18 +84,18 @@ public class ViewController {
     @PostMapping("/cadastro")
     public String formCadastroPost(Model model, Cliente novoCliente) {
 
-        // Salvando novo Cliente no banco de dados 
+        // Salvando novo Cliente no banco de dados
         clienteService.salvar(novoCliente);
         Cliente cliente = clienteService.buscarPeloId(novoCliente.getId());
 
-        //Criando nova conta
+        // Criando nova conta
         Conta novaConta = new Conta();
-        //Setando o cliente
+        // Setando o cliente
         novaConta.setCliente(cliente);
-        //Setando o tipo de conta como conta corrente
+        // Setando o tipo de conta como conta corrente
         TipoConta tipo = tipoContaDao.encontrarPorId(1);
         novaConta.setTipo(tipo);
-        //Setando o número da conta
+        // Setando o número da conta
         Integer numeroConta = contaService.criarNumeroConta(novaConta);
         novaConta.setNumeroConta(numeroConta);
         // Inserindo saldo obrigatorio no registro de conta
@@ -105,11 +106,11 @@ public class ViewController {
         Conta conta = contaService.buscarPeloId(novaConta.getId());
 
         if ((cliente != null) && (conta != null)) {
-            
-            //Caso ambos os registros sejam efetuados, 
-            //redireciona para página de login
+
+            // Caso ambos os registros sejam efetuados,
+            // redireciona para página de login
             return "redirect:/hellobank/view/login";
-        } 
+        }
         return "form_cadastro";
     }
 
@@ -117,7 +118,7 @@ public class ViewController {
 
     /* Saldo */
     @GetMapping("/saldo/{idCliente}")
-    public String saldo(@PathVariable Integer idCliente, Model model){
+    public String saldo(@PathVariable Integer idCliente, Model model) {
         ArrayList<Conta> contas = contaService.buscarPeloIdCliente(idCliente);
         Cliente cliente = clienteService.buscarPeloId(idCliente);
         model.addAttribute("contas", contas);
@@ -125,9 +126,9 @@ public class ViewController {
         return "saldo";
     }
 
-    /* Extrato - verbo http GET */
+    /* Extrato - verbo http GET (botões do menu) */
     @GetMapping("/extrato/{numeroConta}")
-    public String extratoGet(@PathVariable Integer numeroConta, Model model){
+    public String extratoGet(@PathVariable Integer numeroConta, Model model) {
         Conta conta = contaService.buscarPeloNumero(numeroConta);
         Cliente cliente = conta.getCliente();
         ArrayList<Transacao> transacoes = transacaoService.extrato(conta.getId());
@@ -143,14 +144,15 @@ public class ViewController {
     }
 
     @GetMapping("/extrato/cliente/{idCliente}")
-    public String extrato(@PathVariable Integer idCliente, Model model){
+    public String extrato(@PathVariable Integer idCliente, Model model) {
         Cliente cliente = clienteService.buscarPeloId(idCliente);
         ArrayList<Conta> contas = contaService.buscarPeloIdCliente(idCliente);
         Integer numeroConta = 0;
-        for (Conta c : contas){
-            if (c.getTipo().getCodigo() == 1){
+        for (Conta c : contas) {
+            if (c.getTipo().getCodigo() == 1) {
                 numeroConta = c.getNumeroConta();
-            };
+            }
+            ;
         }
         Conta conta = contaService.buscarPeloNumero(numeroConta);
 
@@ -165,11 +167,9 @@ public class ViewController {
         return "extrato";
     }
 
-
-
-    /* Extrato - verbo http POST */
+    /* Extrato - verbo http POST (formulário) */
     @PostMapping("/extrato")
-    public String extratoPost(Conta formConta, Model model){
+    public String extratoPost(Conta formConta, Model model) {
         Conta conta = contaService.buscarPeloNumero(formConta.getNumeroConta());
         Cliente cliente = conta.getCliente();
         ArrayList<Transacao> transacoes = transacaoService.extrato(conta.getId());
@@ -183,5 +183,46 @@ public class ViewController {
         return "extrato";
     }
 
-    /* Extrato - POST */
+    /* Depósito */
+    @GetMapping("/deposito/{idCliente}")
+    public String depositoGet(@PathVariable Integer idCliente, Model model) {
+        Cliente cliente = clienteService.buscarPeloId(idCliente);
+        ArrayList<Conta> contas = contaService.buscarPeloIdCliente(cliente.getId());
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("contas", contas);
+        model.addAttribute("formTransacao", new Transacao());
+
+        return "deposito";
+    }
+
+    @PostMapping("/deposito/{idCliente}")
+    public String depositoPost(@PathVariable Integer idCliente, Transacao formTransacao, Model model) {
+        Cliente cliente = clienteService.buscarPeloId(idCliente);
+        ArrayList<Conta> contas = contaService.buscarPeloIdCliente(cliente.getId());
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("contas", contas);
+
+        Integer numeroConta = formTransacao.getContaOrigem().getNumeroConta();
+        Conta res = contaService.depositar(formTransacao.getContaOrigem(), formTransacao.getValor());
+
+        if (res != null) {
+            transacaoService.salvarTransacao(res, formTransacao.getValor(), 1);
+            return "redirect://localhost:8080/hellobank/view/extrato/" + numeroConta;
+        } else {
+            model.addAttribute("formTransacao", new Transacao());
+            return "deposito";
+        }
+    }
+
+    /* Transferência */
+    @GetMapping("/transferencia/{idCliente}")
+    public String transferenciaGet(@PathVariable Integer idCliente, Model model) {
+        Cliente cliente = clienteService.buscarPeloId(idCliente);
+        ArrayList<Conta> contas = contaService.buscarPeloIdCliente(cliente.getId());
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("contas", contas);
+        model.addAttribute("formTransacao", new Transacao());
+
+        return "transferencia";
+    }
 }
