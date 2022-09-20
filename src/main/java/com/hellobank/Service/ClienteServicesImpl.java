@@ -90,18 +90,13 @@ public class ClienteServicesImpl implements ICliente {
     @Override
     @Transactional
     public void atualizar(Cliente cliente){
-        /*String inome = cliente.getNome();
+        String inome = cliente.getNome();
         String iemail = cliente.getEmail();
         String isenha = cliente.getSenha();
         String iendereco = cliente.getEndereco();
         String icontato = cliente.getContato();
-        Integer idCliente = cliente.getId();*/
-        //String query = "UPDATE cliente (nome, email, senha, endereco, contato) values (" + inome + ","+ iemail + ", " +isenha+", " + iendereco + ", " + icontato +" WHERE id_cliente = " + idCliente + ";";
-        //dao.atualizar(inome, iemail, isenha, iendereco, icontato, idCliente);
-        //dao.atualizar(inome, iemail, isenha, iendereco, icontato, idCliente);*/
-        if(cliente.getId()!=null && cliente.getNome()!=null && cliente.getCpfCnpj()!=null) {
-		dao.save(cliente);
-		}
+        Integer idCliente = cliente.getId();
+        dao.atualizar(inome, iemail, isenha, iendereco, icontato, idCliente);
     
     }
 }
