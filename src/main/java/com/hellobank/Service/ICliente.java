@@ -15,5 +15,6 @@ public interface ICliente {
     public void excluir(Integer id);
     public Cliente buscarPeloCpf(String cpf);
     public Cliente buscarPeloEmail(String email);
+    public void atualizar(Cliente cliente);
 
 }

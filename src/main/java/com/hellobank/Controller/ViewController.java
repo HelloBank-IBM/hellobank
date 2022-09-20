@@ -1,6 +1,5 @@
 package com.hellobank.Controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -324,5 +324,20 @@ public class ViewController {
         return "redirect://localhost:8080/hellobank/view/nova_conta/" + idCliente;
     }
 
-    /* CRUD - Create conta */
+    /* Atualizar dados do cliente */
+    @GetMapping("/config_dados/{idCliente}")
+    public String configDadosGet(@PathVariable Integer idCliente, Model model) {
+        Cliente cliente = clienteService.buscarPeloId(idCliente);
+        model.addAttribute("cliente", cliente);
+
+        return "config_dados";
+    }
+
+    @PostMapping("/config_dados/{idCliente}")
+    public String configDadosPost(@PathVariable Integer idCliente, Cliente cliente, Model model){
+        clienteService.atualizar(cliente);
+        model.addAttribute("cliente", cliente);
+
+        return "redirect://localhost:8080/hellobank/view/config_dados/" + idCliente;
+    }
 }

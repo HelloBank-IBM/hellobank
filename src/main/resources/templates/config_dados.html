@@ -1,49 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="https://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-    <title>HelloBank - Configurações </title>
-</head>
+<head th:replace="~{partials :: head}"></head>
 
 <body>
 
     <div class="container-fluid p-0 m-0">
         <div class="nav-bg-gradient h-auto">
             <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-dark p-5 sticky-top">
-                    <div class="container-fluid">
-                        <a class="navbar-brand text-light h4" href="#"><strong
-                                class="text-warning">Hello</strong>Bank</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
-                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-end" id="navbar">
-                            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                                <li></li>
-                            </ul>
-                            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                                <div class="d-flex">
-                                    <li>
-                                        <p class="navbar-text mx-4"> Bem-vindo, <strong>Nome de Usuário</strong></p>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-outline-warning" href="login.html">Sair</a>
-                                    </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                <nav th:replace="~{partials :: navbar}"></nav>
             </div>
         </div>
 
@@ -54,7 +19,8 @@
                         data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
                         Menu
                     </button>
-                    <a class="col-lg-1 btn btn-md btn-light mx-auto" href="inicio.html">
+                    <a class="col-lg-1 btn btn-md btn-light mx-auto"
+                        th:href="@{/hellobank/view/inicio/{idCliente}(idCliente=${cliente.id})}">
                         Início
                     </a>
                     <div class="offcanvas offcanvas-start menu-offcanvas" data-bs-backdrop="static" tabindex="-1"
@@ -66,19 +32,26 @@
                         </div>
                         <div class="offcanvas-body">
                             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="saldo.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/saldo/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-sack-dollar menu-icon-lg"></i> Saldo </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="extrato.html"> <i
-                                        class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="saque.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/extrato/cliente/{idCliente}(idCliente=${cliente.id})}">
+                                    <i class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/saque/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-hand-holding-dollar menu-icon-lg"></i> Saque </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="transferencia.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/transferencia/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-money-bill-transfer menu-icon-lg"></i> Transferir </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="nova_conta.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/nova_conta/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-square-plus menu-icon-lg"></i> <span>Nova Conta</span> </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="deposito.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/deposito/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-money-bill-1-wave menu-icon-lg"></i> Depósito </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="config_dados.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/config_dados/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-id-card menu-icon-lg"></i> Meus dados </a>
                             </div>
                         </div>
@@ -87,72 +60,71 @@
 
                 <div class="container justify-content-center border p-3 rounded-4 ">
 
-                    <form class="m-1">
+                    <form class="m-3 p-3" th:object="${cliente}" th:action="@{/hellobank/view/config_dados/{idCliente}(idCliente=${cliente.id})}" method="post">
                         <legend><b>Configurações</b> - Meus Dados </legend>
-
+                        <input style="color: red" th:field="*{id}" id="id" name="id" disabled></input>
                         <div class="col">
                             <div class="form-floating mb-4">
-                                <input type="text" class="form-control" id="floatingNome" placeholder="Nome e Sobrenome" value="Nome e Sobrenome do Usuário">
-                                <label for="floatingNome">Nome Completo</label>
+                                <input type="text" th:field="*{nome}" class="form-control" id="nome" name="nome" placeholder="Nome e Sobrenome"
+                                    value="Nome e Sobrenome do Usuário" required />
+                                <label for="nome">Nome Completo</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="form-floating mb-4">
-                                    <input type="email" class="form-control" id="floatingEmail" placeholder="nome@email.com" value="nome@email.com">
+                                    <input th:field=*{email} type="email" class="form-control" id="email" name="email"
+                                        placeholder="nome@email.com" required />
                                     <label for="floatingEmail">E-mail</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-floating mb-4">
-                                    <input type="password" class="form-control" id="floatingSenha" placeholder="******" value="123456">
+                                    <input th:field="*{senha}" type="password" class="form-control" minlength="5" id="senha" name="senha" placeholder="******" required />
                                     <label for="floatingSenha">Senha</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating mb-4">
-                                <input type="text" class="form-control" id="floatingEndereco" placeholder="Nome e Sobrenome" value="Rua Principal, número 01, Cidade - Estado - CEP 00000-000">
-                                <label for="floatingNome">Endereco</label>
+                                <input th:field="*{endereco}"type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço Completo" required />
+                                <label for="nome">Endereco</label>
                             </div>
                         </div>
-        
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-floating mb-4">
-                                    <input type="text" class="form-control" id="floatingCpf" placeholder="000.000.000-00" value="000.000.000-00" disabled>
-                                    <label for="floatingCpf">CPF | CNPJ</label>
+                                    <input type="text" th:field="*{cpfCnpj}" class="form-control" id="cpfCnpj" name="cpfCnpj"
+                                        placeholder="000.000.000-00" readonly />
+                                    <label for="cpfCnpj">CPF | CNPJ</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-floating mb-4">
-                                    <input type="text" class="form-control" id="floatingContato" placeholder="(xx) 99999-9999" value="(xx) 99999-9999">
-                                    <label for="floatingContato">Contato</label>
+                                    <input th:field="*{contato}" type="text" class="form-control" id="contato" name="contato">
+                                    <label for="contato">Contato</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="d-flex justify-content-center align">
-                                    <a class="btn btn-lg btn-outline-info mx-3" href="inicio.html">Cancelar</a>
-                                    <a class="btn btn-lg btn-warning mx-3" href="inicio.html">Salvar Alterações</a>
+                                    <button type="submit" class="btn btn-lg btn-warning mx-3">Salvar Alterações</button>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            <div class="container mt-5 mb-0 pb-0 pt-5">
+                <p class="text-center text-muted border-bottom m-1">Grupo 2</p>
+                <p class="text-center text-muted m-1">2022 - If Black Then Code</p>
+            </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-        crossorigin="anonymous"></script>
+    <div th:replace="~{partials :: scripts}"></div>
 </body>
 
 </html>

@@ -3,6 +3,8 @@ package com.hellobank.Service;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,6 @@ import org.springframework.util.StringUtils;
 
 import com.hellobank.DAO.ClienteDAO;
 import com.hellobank.Model.Cliente;
-import com.hellobank.Model.Conta;
-import com.hellobank.Model.TipoConta;
 import com.hellobank.Service.exception.CpfCnpjObrigatorioClienteException;
 import com.hellobank.Service.exception.EmailClienteJaCadastradoException;
 import com.hellobank.Service.exception.ObjetoNaoEncontradoException;
@@ -20,9 +20,11 @@ import com.hellobank.Service.exception.ObjetoNaoEncontradoException;
 @Service
 public class ClienteServicesImpl implements ICliente {
 
-
     @Autowired
     private ClienteDAO dao;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public ArrayList<Cliente> buscarTodos() {
@@ -92,5 +94,20 @@ public class ClienteServicesImpl implements ICliente {
     public Cliente buscarPeloEmail(String email){
         Optional<Cliente> cliente = dao.findByEmail(email);
         return cliente.orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public void atualizar(Cliente cliente){
+        String inome = cliente.getNome();
+        String iemail = cliente.getEmail();
+        String isenha = cliente.getSenha();
+        String iendereco = cliente.getEndereco();
+        String icontato = cliente.getContato();
+        Integer idCliente = cliente.getId();
+        //String query = "UPDATE cliente (nome, email, senha, endereco, contato) values (" + inome + ","+ iemail + ", " +isenha+", " + iendereco + ", " + icontato +" WHERE id_cliente = " + idCliente + ";";
+        //dao.atualizar(inome, iemail, isenha, iendereco, icontato, idCliente);
+        //dao.atualizar(inome, iemail, isenha, iendereco, icontato, idCliente);*/
+        dao.save(cliente);
     }
 }
