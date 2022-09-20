@@ -39,6 +39,7 @@ public class TransacaoServiceImpl   implements ITransacaoService{
 	@Override
 	public Transacao salvarTransacao(Conta contaOrigem, Conta contaDestino, Float valor, Integer idTipoTransacao){
 		Transacao transacao = new Transacao();
+		transacao.setId(null);
 		LocalDate data = LocalDate.now();
 
 		transacao.setContaOrigem(contaOrigem);

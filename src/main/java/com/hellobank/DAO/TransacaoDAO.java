@@ -9,7 +9,7 @@ import com.hellobank.Model.Transacao;
 
 public interface TransacaoDAO extends CrudRepository<Transacao, Integer>{
 	
-@Query(value="SELECT * FROM transacao WHERE conta_origem = :idConta ORDER BY data DESC", nativeQuery=true)
+@Query(value="SELECT * FROM transacao WHERE conta_origem = :idConta ORDER BY id_transacao DESC", nativeQuery=true)
 public ArrayList<Transacao> extrato(Integer idConta);
 	
 }

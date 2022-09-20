@@ -225,4 +225,62 @@ public class ViewController {
 
         return "transferencia";
     }
+
+    @PostMapping("/transferencia/{idCliente}")
+    public String transferenciaPost(@PathVariable Integer idCliente, @RequestParam Integer numeroContaOrigem,
+            @RequestParam Float valor, @RequestParam Integer numeroContaDestino, Model model) {
+        Cliente cliente = clienteService.buscarPeloId(idCliente);
+        ArrayList<Conta> contas = contaService.buscarPeloIdCliente(cliente.getId());
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("contas", contas);
+
+        // Setando as variáveis que serão utilizadas como parâmetros para os próximos
+        // métodos
+        Conta contaDestino = contaService.buscarPeloNumero(numeroContaDestino);
+        Conta contaOrigem = contaService.buscarPeloNumero(numeroContaOrigem);
+        if (contaOrigem != null && contaDestino != null) {
+            Conta res = contaService.transferencia(contaOrigem, valor, contaDestino);
+            if (res != null) {
+                // método 'salvarTransacao': cria e salva transação no banco de dados com a data
+                // atual
+                // Parâmetros: contaOrigem (objeto da Classe Conta), valor (float),
+                // idTipoTransacao(integer).
+                // Para idTipoTransacao: 1 == depósito, 2 == saque, 3 == transferência
+                transacaoService.salvarTransacao(contaOrigem, contaDestino, valor, 3);
+                return "redirect://localhost:8080/hellobank/view/extrato/" + numeroContaOrigem;
+            }
+        }
+        return "transferencia";
+    }
+
+    /* Saque */
+    @GetMapping("/saque/{idCliente}")
+    public String saqueGet(@PathVariable Integer idCliente, Model model) {
+        Cliente cliente = clienteService.buscarPeloId(idCliente);
+        ArrayList<Conta> contas = contaService.buscarPeloIdCliente(cliente.getId());
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("contas", contas);
+        model.addAttribute("formTransacao", new Transacao());
+
+        return "saque";
+    }
+
+    @PostMapping("/saque/{idCliente}")
+    public String saquePost(@PathVariable Integer idCliente, Transacao formTransacao, Model model) {
+        Cliente cliente = clienteService.buscarPeloId(idCliente);
+        ArrayList<Conta> contas = contaService.buscarPeloIdCliente(cliente.getId());
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("contas", contas);
+
+        Integer numeroConta = formTransacao.getContaOrigem().getNumeroConta();
+        Conta res = contaService.sacar(formTransacao.getContaOrigem(), formTransacao.getValor());
+
+        if (res != null) {
+            transacaoService.salvarTransacao(res, formTransacao.getValor(), 2);
+            return "redirect://localhost:8080/hellobank/view/extrato/" + numeroConta;
+        } else {
+            model.addAttribute("formTransacao", new Transacao());
+            return "deposito";
+        }
+    }
 }
