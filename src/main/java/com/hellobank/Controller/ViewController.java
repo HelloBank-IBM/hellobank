@@ -342,11 +342,8 @@ public class ViewController {
         atualizado.setEndereco(cliente.getEndereco());
         atualizado.setNome(cliente.getNome());
         atualizado.setSenha(cliente.getSenha());
-
         clienteService.atualizar(atualizado);
-
         model.addAttribute("cliente", atualizado);
-
         return "redirect://localhost:8080/hellobank/view/config_dados/" + idCliente;
     }
 }
