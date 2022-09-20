@@ -1,49 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="https://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-    <title>HelloBank - Saque</title>
-</head>
+<head th:replace="~{partials :: head}"></head>
 
 <body>
 
     <div class="container-fluid p-0 m-0">
         <div class="nav-bg-gradient h-auto">
             <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-dark p-5 sticky-top">
-                    <div class="container-fluid">
-                        <a class="navbar-brand text-light h4" href="#"><strong
-                                class="text-warning">Hello</strong>Bank</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
-                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-end" id="navbar">
-                            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                                <li></li>
-                            </ul>
-                            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                                <div class="d-flex">
-                                    <li>
-                                        <p class="navbar-text mx-4"> Bem-vindo, <strong>Nome de Usuário</strong></p>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-outline-warning" href="login.html">Sair</a>
-                                    </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                <nav th:replace="~{partials :: navbar}"></nav>
             </div>
         </div>
 
@@ -54,7 +19,8 @@
                         data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
                         Menu
                     </button>
-                    <a class="col-lg-1 btn btn-md btn-light mx-auto" href="inicio.html">
+                    <a class="col-lg-1 btn btn-md btn-light mx-auto"
+                        th:href="@{/hellobank/view/inicio/{idCliente}(idCliente=${cliente.id})}">
                         Início
                     </a>
                     <div class="offcanvas offcanvas-start menu-offcanvas" data-bs-backdrop="static" tabindex="-1"
@@ -66,19 +32,26 @@
                         </div>
                         <div class="offcanvas-body">
                             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="saldo.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/saldo/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-sack-dollar menu-icon-lg"></i> Saldo </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="extrato.html"> <i
-                                        class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="saque.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/extrato/cliente/{idCliente}(idCliente=${cliente.id})}">
+                                    <i class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/saque/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-hand-holding-dollar menu-icon-lg"></i> Saque </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="transferencia.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/transferencia/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-money-bill-transfer menu-icon-lg"></i> Transferir </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="nova_conta.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/nova_conta/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-square-plus menu-icon-lg"></i> <span>Nova Conta</span> </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="deposito.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/deposito/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-money-bill-1-wave menu-icon-lg"></i> Depósito </a>
-                                <a class="col-1 menu-options-sm btn btn-outline-warning" href="configDados.html"> <i
+                                <a class="col-1 menu-options-sm btn btn-outline-warning"
+                                    th:href="@{/hellobank/view/config_dados/{idCliente}(idCliente=${cliente.id})}"> <i
                                         class="fa-solid fa-id-card menu-icon-lg"></i> Meus dados </a>
                             </div>
                         </div>
@@ -87,75 +60,64 @@
 
                 <div class="container justify-content-center border p-3 rounded-4 ">
 
-                    <form class="mb-3 p-3 border-bottom">
+                    <form th:action="@{/hellobank/view/extrato}" method="post" th:object="${formConta}"
+                        class="mb-3 p-3 border-bottom">
                         <legend> <b>Extrato</b> - Selecione a conta desejada </h4>
                         </legend>
                         <div class="row">
                             <div class="col-lg-5">
-                                <label for="inputTipoConta" class="col-form-label" disabled>Conta</label>
-                                <select class="form-select" id="inputTipoConta"
-                                    aria-label="Selecione a conta para depósito">
-                                    <option selected>Selecionar</option>
-                                    <option value="1">Conta Corrente</option>
-                                    <option value="2">Poupança</option>
-                                    <option value="3">Universitária</option>
-                                    <option value="4">Salário</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-5">
-                                <label for="inputNumeroConta" class="col-form-label" disabled>Número</label>
                                 <div class="input-group mb-3">
-                                    <input type="number" disabled class="form-control" id="inputNumeroConta"
-                                        value="07177773">
+                                    <select class="form-select" th:field="*{numeroConta}" id="inputTipoConta">
+                                        <option th:each="c : ${contas}" th:value="${{c.numeroConta}}"><span
+                                                th:text="${{c.tipo.nome}}"></span></option>
+                                    </select>
                                     <button type="submit" class="btn btn-warning"> Gerar Extrato </button>
                                 </div>
                             </div>
                         </div>
                     </form>
 
-                    <table class="table table-hover" style="font-size: 0.8em">
+
+                    <table class="table table-hover table-striped" style="font-size: 0.8em">
                         <thead>
+                            <tr class="table-warning">
+                                <th>Conta Nº: <b th:text="${{conta.numeroConta}}"></b></th>
+                                <th>Tipo: <b th:text="${{conta.tipo.nome}}"></b></th>
+                                <th colspan="2"></th>
+                            </tr>
                             <tr class="table-dark" style="font-size: 0.8em">
                                 <th scope="col">Transação</th>
                                 <th scope="col">Data</th>
                                 <th scope="col">Valor</th>
-                                <th scope="col">Detalhes</th>
+                                <th scope="col">Destino</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">Depósito</th>
-                                <td>10/09/2022</td>
-                                <td>R$ 350.00</td>
-                                <td><a class="btn btn-outline-info"><i class="fa-solid fa-plus"></i></a></td>
+                            <tr th:each="transacao : ${transacoes}">
+                                <th scope="row" th:text="${{transacao.tipoTransacao.nome}}"></th>
+                                <td th:text="${{transacao.data}}"></td>
+                                <td>R$ <span th:text="${{transacao.valor}}"></span></td>
+                                <td>
+                                    <span th:if="${{transacao.contaDestino != null}}"
+                                        th:text="${{transacao.contaDestino.numeroConta}}"></span>
+                                </td>
                             </tr>
-                            <tr>
-                                <th scope="row">Saque</th>
-                                <td>05/09/2022</td>
-                                <td>R$ 1200.00</td>
-                                <td><a class="btn btn-outline-info"><i class="fa-solid fa-plus"></i></a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Transferência</th>
-                                <td>11/09/2022</td>
-                                <td>R$ 150.00</td>
-                                <td><a class="btn btn-outline-info"><i class="fa-solid fa-plus"></i></a></td>
+                            <tr th:if="${transacoes.isEmpty()} == true">
+                                <td class="text-center text-danger" colspan="4">Não registros de transações para esta
+                                    conta.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            <div class="container mt-5 mb-0 pb-0 pt-5">
+                <p class="text-center text-muted border-bottom m-1">Grupo 2</p>
+                <p class="text-center text-muted m-1">2022 - If Black Then Code</p>
+            </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-        crossorigin="anonymous"></script>
+    </div>
+    <div th:replace="~{partials :: scripts}"></div>
 </body>
 
 </html>

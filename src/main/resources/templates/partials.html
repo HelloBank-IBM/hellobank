@@ -83,7 +83,7 @@
     <div th:fragment="menu" class="row align-items-start align-content-center justify-content-center m-4 p-4">
         <a class="col-1 menu-options btn btn-outline-dark" th:href="@{/hellobank/view/saldo/{idCliente}(idCliente=${cliente.id})}"> <i class="fa-solid fa-sack-dollar menu-icon-lg"></i> Saldo </a>
         <a class="col-1 menu-options btn btn-outline-dark" th:href="@{/hellobank/view/deposito/{idCliente}(idCliente=${cliente.id})}"> <i class="fa-solid fa-money-bill-1-wave menu-icon-lg"></i> Depósito </a>
-        <a class="col-1 menu-options btn btn-outline-dark" th:href="@{/hellobank/view/extrato/{idCliente}(idCliente=${cliente.id})}"> <i class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
+        <a class="col-1 menu-options btn btn-outline-dark" th:href="@{/hellobank/view/extrato/cliente/{idCliente}(idCliente=${cliente.id})}"> <i class="fa-solid fa-money-bill-trend-up menu-icon-lg"></i> Extrato </a>
         <a class="col-1 menu-options btn btn-outline-dark" th:href="@{/hellobank/view/saque/{idCliente}(idCliente=${cliente.id})}"> <i class="fa-solid fa-hand-holding-dollar menu-icon-lg"></i> Saque </a>
         <a class="col-1 menu-options btn btn-outline-dark" th:href="@{/hellobank/view/transferencia/{idCliente}(idCliente=${cliente.id})}"> <i class="fa-solid fa-money-bill-transfer menu-icon-lg"></i> Transferir </a>
         <a class="col-1 menu-options btn btn-outline-dark" th:href="@{/hellobank/view/nova_conta/{idCliente}(idCliente=${cliente.id})}"> <i class="fa-solid fa-square-plus menu-icon-lg"></i> <span style="font-size: 0.9em">Nova Conta</span> </a>

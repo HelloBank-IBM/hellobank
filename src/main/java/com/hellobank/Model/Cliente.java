@@ -15,17 +15,17 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id_cliente")
     private Integer id;
-    @Column(length = 60,nullable = false)
+    @Column(name="nome", length = 60,nullable = false)
     private String nome;
-    @Column(length = 11,nullable = true)
+    @Column(name="contato", length = 11,nullable = true)
     private String contato;
     @Column(name = "cpf_cnpj",length = 20,unique = true,nullable = false)
     private String cpfCnpj;
-    @Column(length = 100,nullable = true)
+    @Column(name= "endereco",length = 100,nullable = true)
     private String endereco;
-    @Column(length = 50,nullable = false)
+    @Column(name="email", length = 50,nullable = false)
     private String email;
-    @Column(length =25 ,nullable=false)
+    @Column(name="senha", length =25 ,nullable=false)
     private String senha;
 
     public String getSenha() {
