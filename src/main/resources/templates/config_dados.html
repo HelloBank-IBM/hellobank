@@ -62,8 +62,7 @@
 
                     <form class="m-3 p-3" th:object="${cliente}" th:action="@{/hellobank/view/config_dados/{idCliente}(idCliente=${cliente.id})}" method="post">
                         <legend><b>Configurações</b> - Meus Dados </legend>
-                        <input style="color: red" th:field="*{id}" id="id" name="id" disabled></input>
-                        <div class="col">
+                        <div class="col mt-3">
                             <div class="form-floating mb-4">
                                 <input type="text" th:field="*{nome}" class="form-control" id="nome" name="nome" placeholder="Nome e Sobrenome"
                                     value="Nome e Sobrenome do Usuário" required />
@@ -114,6 +113,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input style="display: none" th:field="*{id}" id="id" name="id" disabled></input>
                     </form>
                 </div>
             </div>
