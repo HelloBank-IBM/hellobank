@@ -16,11 +16,12 @@
             <div class="row align-items-start align-content-center justify-content-center m-3">
                 <div class="container justify-content-center mb-3">
                     <button class="btn btn-md btn-light col-lg-1 mx-auto" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                        data-bs-target="#staticBackdrop" aria-controls="staticBackdrop"><i class="fa-solid fa-bars"></i>
                         Menu
                     </button>
                     <a class="col-lg-1 btn btn-md btn-light mx-auto"
-                        th:href="@{/hellobank/view/inicio/{idCliente}(idCliente=${cliente.id})}">
+                        th:href="@{/hellobank/view/inicio/{idCliente}(idCliente=${cliente.id})}"><i
+                            class="fa-solid fa-house"></i>
                         Início
                     </a>
                     <div class="offcanvas offcanvas-start menu-offcanvas" data-bs-backdrop="static" tabindex="-1"
@@ -62,10 +63,10 @@
 
                     <form th:action="@{/hellobank/view/extrato}" method="post" th:object="${formConta}"
                         class="mb-3 p-3 border-bottom">
-                        <legend> <b>Extrato</b> - Selecione a conta desejada </h4>
+                        <legend class="mb-3 pb-3 border-bottom"> <b>Extrato</b> - Selecione a conta desejada </h4>
                         </legend>
                         <div class="row">
-                            <div class="col-lg-5">
+                            <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <select class="form-select" th:field="*{numeroConta}" id="inputTipoConta">
                                         <option th:each="c : ${contas}" th:value="${{c.numeroConta}}"><span
@@ -83,23 +84,26 @@
                             <tr class="table-warning">
                                 <th>Conta Nº: <b th:text="${{conta.numeroConta}}"></b></th>
                                 <th>Tipo: <b th:text="${{conta.tipo.nome}}"></b></th>
-                                <th colspan="2"></th>
+                                <th colspan="2">Saldo Atual: <b>R$ <span th:text="${{conta.saldo}}"></span></b></th>
                             </tr>
                             <tr class="table-dark" style="font-size: 0.8em">
-                                <th scope="col">Transação</th>
-                                <th scope="col">Data</th>
-                                <th scope="col">Valor</th>
-                                <th scope="col">Destino</th>
+                                <th>Transação</th>
+                                <th>Data</th>
+                                <th>Valor</th>
+                                <th>Detalhes</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="transacao : ${transacoes}">
-                                <th scope="row" th:text="${{transacao.tipoTransacao.nome}}"></th>
+                                <td th:text="${{transacao.tipoTransacao.nome}}">
+                                </td>
                                 <td th:text="${{transacao.data}}"></td>
                                 <td>R$ <span th:text="${{transacao.valor}}"></span></td>
                                 <td>
-                                    <span th:if="${{transacao.contaDestino != null}}"
-                                        th:text="${{transacao.contaDestino.numeroConta}}"></span>
+                                    <span th:if="${transacao.tipoTransacao.id} == 3">
+                                        Conta Nº <span th:text="${{transacao.contaDestino.numeroConta}}"></span>
+                                        <br><span th:text="${{transacao.contaDestino.cliente.nome}}"></span>
+                                    </span>
                                 </td>
                             </tr>
                             <tr th:if="${transacoes.isEmpty()} == true">
@@ -108,7 +112,9 @@
                             </tr>
                         </tbody>
                     </table>
+
                 </div>
+
             </div>
             <div class="container mt-5 mb-0 pb-0 pt-5">
                 <p class="text-center text-muted border-bottom m-1">Grupo 2</p>
