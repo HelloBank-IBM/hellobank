@@ -106,7 +106,9 @@ Criar uma aplicação para o banco fictício *HelloBank*, utilizando conheciment
  
  ## Como executar a aplicação
   Antes de iniciar a aplicação, é necessário criar um banco de dados no MySQL chamado **hellobank** na porta **3306**, no **localhost**. Configure seus usuário e senha no arquivo `src\main\resources\application.properties`, e execute os <a href="https://github.com/HelloBank-IBM/hellobank/blob/main/sql_script_hellobank.sql">Scripts SQL</a> para criação e população das tabelas. A seguir, torne os scripts shell executáveis com o comando `chmod +x` e execute a aplicação com o comando `./start.sh`
+  
   Para visualizar o front-end da aplicação, basta digitar a seguinte URL no navegador: `http://localhost:8080/hellobank/view/login`
+  
   Os endpoints da API serão tratados nos tópicos a seguir.
   
  ## Endpoints
