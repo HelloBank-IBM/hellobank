@@ -366,4 +366,64 @@ curl --location --request GET 'http://localhost:8080/cliente/68'
 {"id":68,"nome":"Tales Silva","contato":"21987894321","cpfCnpj":"98778945612","endereco":"Rua A, Bairro A, CidadeA1-RJ","email":"tales@teste.com","senha":"12345","novo":false}
 ```
 
-### Classe **Transacao***
+### Classe **Transacao**
+A Classe Transacao possui os seguintes atributos:
+```java
+public class Transacao {
+    private Integer id;
+    private Conta contaOrigem;
+    private Conta contaDestino;
+    private LocalDate data;
+    private float valor;
+    private TipoTransacao tipoTransacao;
+ }
+ ```
+ 
+ #### Listar Transacoes
+ - Verbo HTTP **GET**
+ - Endpoint
+```curl
+localhost:8080/transacao
+```
+- Exemplo de request:
+```curl
+curl --location --request GET 'localhost:8080/transacao'
+```
+- Exemplo de response: `HTTP Status 200 ok`
+```curl
+[
+{"id":1,"contaOrigem":{"id":1,"tipo":{"codigo":1,"nome":"Corrente"},"saldo":347,"cliente":{"id":1,"novo":false},"numeroConta":7111111},"contaDestino":null,"data":"2022-09-19","valor":100,"tipoTransacao":{"id":1,"nome":"Deposito"}},
+{"id":2,"contaOrigem":{"id":2,"tipo":{"codigo":2,"nome":"Poupanca"},"saldo":1175,"cliente":{"id":2,"novo":false},"numeroConta":7122222},"contaDestino":null,"data":"2022-09-20","valor":200,"tipoTransacao":{"id":2,"nome":"Saque"}},    
+{"id":3,"contaOrigem":{"id":3,"tipo":{"codigo":3,"nome":"Universitaria"},"saldo":1740,"cliente":{"id":3,"novo":false},"numeroConta":7133333},"contaDestino":{"id":4,"tipo":{"codigo":4,"nome":"Salario"},"saldo":1763.7,"cliente":{"id":4,"novo":false},"numeroConta":7144444},"data":"2022-09-21","valor":300,"tipoTransacao":{"id":3,"nome":"Transferencia"}}  
+]
+```
+
+#### Nova Transacao
+- Verbo HTTP **POST** 
+- Parâmetros
+  - ID Conta Drigem
+  - Saldo
+  - ID Conta Destino
+  - Valor
+  - ID Tipo Transacao
+
+### Classe TipoTransacao
+Esta classe possui os seguintes atributos:
+```java
+public class TipoTransacao {
+private Integer id;
+private String nome;
+}
+```
+No Script SQL são criados três tipos de transação:
+- Depósito
+- Saque
+- Transferência
+
+### Classe TipoConta
+Esta classe possui os seguintes atributos
+```java
+public class TipoConta {
+private Integer codigo;
+private String nome;
+```
