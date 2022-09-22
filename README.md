@@ -443,6 +443,7 @@ private String nome;
 ```
 
 ## Front-End - Prévia das telas da aplicação
+**Como usar:** Com a aplicação em execução, basta acessar o seguinte endereço pelo navegador: `http://localhost:8080/hellobank/view/login`
 
 ### Tela de Login
 
