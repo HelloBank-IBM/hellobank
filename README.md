@@ -96,7 +96,17 @@ Criar uma aplicação para o banco fictício *HelloBank*, utilizando conheciment
  ## Endpoints
  A documentação completa dos Endpoints da aplicação podem ser visualizada <a href="Model-View-Controller" target="_blank"> aqui </a>.
 
-### Package **Contas**
+### Classe **Conta**
+A entidade Conta possui os seguintes atributos:
+```java
+public class Conta {
+    private Integer id;
+    private TipoConta tipo;
+    private Float saldo;
+    private Cliente cliente;
+    private Integer numeroConta;
+```
+
 #### Listar Contas
 - Verbo HTTP **GET**
 - Endpoint: 
@@ -205,3 +215,155 @@ curl --location --request POST 'localhost:8080/extrato/7122222'
 ```curl
 [{"id":2,"contaOrigem":{"id":2,"tipo":{"codigo":2,"nome":"Poupanca"},"saldo":1175,"cliente":{"id":2,"novo":false},"numeroConta":7122222},"contaDestino":null,"data":"2022-09-20","valor":200,"tipoTransacao":{"id":2,"nome":"Saque"}},{"id":9,"contaOrigem":{"id":2,"tipo":{"codigo":2,"nome":"Poupanca"},"saldo":1175,"cliente":{"id":2,"novo":false},"numeroConta":7122222},"contaDestino":{"id":1,"tipo":{"codigo":1,"nome":"Corrente"},"saldo":-190,"cliente":{"id":1,"novo":false},"numeroConta":7111111},"data":"2022-09-18","valor":50,"tipoTransacao":{"id":3,"nome":"Transferencia"}},{"id":11,"contaOrigem":{"id":2,"tipo":{"codigo":2,"nome":"Poupanca"},"saldo":1175,"cliente":{"id":2,"novo":false},"numeroConta":7122222},"contaDestino":{"id":1,"tipo":{"codigo":1,"nome":"Corrente"},"saldo":-190,"cliente":{"id":1,"novo":false},"numeroConta":7111111},"data":"2022-09-18","valor":65,"tipoTransacao":{"id":3,"nome":"Transferencia"}}]
 ```
+
+#### Saque
+- Verbo HTTP **GET**
+- Endpoint
+```curl
+localhost:8080/saque/{numeroConta}/{valor}
+```
+- Exemplo de request:
+```curl
+curl --location --request POST 'localhost:8080/saque/7133333/500' \
+--data-raw ''
+```
+- Exemplo de response: `HTTP Status 200 ok`
+```curl
+{"id":2,"tipo":{"codigo":2,"nome":"Poupanca"},"saldo":1175,"cliente":{"id":2,"novo":false},"numeroConta":7122222}
+```
+
+
+### Classe **Cliente**
+A entidade Cliente possui os seguintes atributos:
+```java
+public class Cliente {
+    private Integer id;
+    private String nome;
+    private String contato;
+    private String cpfCnpj;
+    private String endereco;
+    private String email;
+    private String senha;
+```
+#### Listar Clientes
+- Verbo HTTP **GET**
+- Endpoint
+```curl
+http://localhost:8080/cliente
+```
+- Exemplo de request
+``` curl
+curl --location --request GET 'http://localhost:8080/cliente'
+```
+- Exemplo de response: `HTTP Status 200 ok`
+```curl
+[{"id":4,"nome":"Cristiane Barros Cruz","contato":"21987994321","cpfCnpj":"18188223425","endereco":"Rua D, Bairro D, CidadeD4-RJ","email":"cristiane@teste.com","senha":"852014369","novo":false},{"id":5,"nome":"Natanael Carvalho de Queiroz","contato":"71980054321","cpfCnpj":"16021023765","endereco":"Rua E, Bairro E, CidadeE5-RJ","email":"natanael@gteste.com","senha":"521473698","novo":false},{"id":6,"nome":"Marcus Vinicius Lameu Lima","contato":"71987074321","cpfCnpj":"16411146144","endereco":"Rua F, Bairro F, CidadeF6-RJ","email":"marcus@teste.com","senha":"214736985","novo":false}]
+```
+
+### Cadastrar Cliente
+- Verbo HTTP **POST**
+- Parâmetros: 
+  - nome
+  - contato
+  - cpfCnpj
+  - endereco
+  - email
+  - senha 
+- Endpoint
+```curl
+http://localhost:8080/cliente
+```
+- Exemplo de request:
+```curl
+curl --location --request POST 'http://localhost:8080/cliente' \
+--data-raw '{
+    "nome": "Tales Pereira",
+    "contato": "21987894321",
+    "cpfCnpj": "98778945612",
+    "endereco": "Rua A, Bairro A, CidadeA1-RJ",
+    "email": "tales@teste.com",
+    "senha": "12345"
+}'
+```
+- Exemplo de response: `HTTP Status 200 ok`
+```curl
+{
+  "id": 68,
+  "nome": "Tales Pereira",
+  "contato": "21987894321",
+  "cpfCnpj": "98778945612",
+  "endereco": "Rua A, Bairro A, CidadeA1-RJ",
+  "email": "tales@teste.com",
+  "senha": "12345",
+  "novo": false
+}
+```
+
+#### Atualizar Cliente
+- Verbo HTTP **PUT**
+- Parâmetros: 
+  - nome
+  - contato
+  - cpfCnpj
+  - endereco
+  - email
+  - senha 
+- Endpoint
+```curl
+localhost:8080/cliente
+```
+- Exemplo de request
+```curl
+curl --location --request PUT 'http://localhost:8080/cliente' \
+--data-raw '{
+    "id": 68,
+    "nome": "Tales Silva",
+    "contato": "21987894321",
+    "cpfCnpj": "98778945612",
+    "endereco": "Rua A, Bairro A, CidadeA1-RJ",
+    "email": "tales@teste.com",
+    "senha": "12345",
+    "novo": false
+}'
+```
+- Exemplo de response: `HTTP Status 200 ok`
+```curl
+{
+  "id": 68,
+  "nome": "Tales Silva Souza",
+  "contato": "21987894321",
+  "cpfCnpj": "98778945612",
+  "endereco": "Rua A, Bairro A, CidadeA1-RJ",
+  "email": "tales@email.com",
+  "senha": "12345",
+  "novo": false
+}
+```
+#### Excluir Cliente
+- Verbo HTTP **DELETE**
+- Endpoint
+```curl
+localhost:8080/cliente/{id}
+```
+- Exemplo de request
+```curl
+curl --location --request DELETE 'http://localhost:8080/cliente/68' \
+--data-raw ''
+```
+
+#### Buscar Cliente por Id
+- Verbo HTTP **GET**
+- Endpoint
+```curl
+localhost:8080/cliente/{id}
+```
+- Exemplo de request
+```curl
+curl --location --request GET 'http://localhost:8080/cliente/68'
+```
+- Exemplo de response: `HTTP Status 200 ok`
+```curl
+{"id":68,"nome":"Tales Silva","contato":"21987894321","cpfCnpj":"98778945612","endereco":"Rua A, Bairro A, CidadeA1-RJ","email":"tales@teste.com","senha":"12345","novo":false}
+```
+
+### Classe **Transacao***
