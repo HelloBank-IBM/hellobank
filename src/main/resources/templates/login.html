@@ -7,20 +7,22 @@
 <body id="bg-gradient">
     <div class="container-fluid py-0">
         <div class="container">
-
             <nav th:replace="~{partials :: navbar-index}"></nav>
             </nav>
         </div>
-
         <div class="container text-center justify-content-center">
             <div class="row mb-2">
                 <h1 class="text-light">Log In</h1>
                 <p class="text-light">Não possui senha? Por favor, <a href="/hellobank/view/cadastro" class="text-warning">
                         cadastre-se</a>.</p>
             </div>
+           
             <div class="row justify-content-center form-container">
+                
                 <div class="">
+
                     <form th:action="@{/hellobank/view/login}" th:object="${login}" method="post">
+                     
                             <div class="form-floating mb-3">
                                 <input th:field="*{cpfCnpj}" type="text" class="form-control" id="cpfCnpj"
                                     placeholder="000.000.000-00">
@@ -33,13 +35,16 @@
                             </div>
                             <input type="submit" class="btn btn-lg btn-login" value="Acessar">
                     </form>
+
                 </div>
             </div>
+            
         </div>
+        
     </div>
     <footer th:replace="~{partials :: footer-login}">
     </footer>
-
+    
     <div th:replace="~{partials :: scripts}"></div>
 </body>
 

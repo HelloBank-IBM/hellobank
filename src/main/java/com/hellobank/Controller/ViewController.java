@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hellobank.DAO.TipoContaDAO;
 import com.hellobank.Model.Cliente;
@@ -53,13 +54,13 @@ public class ViewController {
 
     /* Login no sistema */
     @GetMapping("/login")
-    public String loginPage(Model model) {
+    public String loginPage(Model model,RedirectAttributes attributes) {
         model.addAttribute("login", new Cliente());
         return "login";
     }
 
     @PostMapping("/login")
-    public String loginPost(@RequestParam String cpfCnpj, @RequestParam String senha, Model model) {
+    public String loginPost(@RequestParam String cpfCnpj, @RequestParam String senha, Model model,RedirectAttributes mensagem) {
         System.out.println("CPF: " + cpfCnpj + "  |  senha: " + senha);
         Cliente cliente = clienteService.buscarPeloCpf(cpfCnpj);
         System.out.println("Registro: \n CPF : " + cpfCnpj + " | Senha: " + senha);
@@ -67,8 +68,10 @@ public class ViewController {
             model.addAttribute("cliente", cliente);
             return "inicio";
         } else {
+           // mensagem.addFlashAttribute("mensagem","Verifique se os campos obrigatorios foram preenchidos!");
             model.addAttribute("login", new Cliente());
             return "login";
+
         }
     }
 
@@ -185,7 +188,8 @@ public class ViewController {
 
     /* Depósito */
     @GetMapping("/deposito/{idCliente}")
-    public String depositoGet(@PathVariable Integer idCliente, Model model) {
+    public String depositoGet(@PathVariable Integer idCliente, Model model,RedirectAttributes redirAttrs) {
+        
         Cliente cliente = clienteService.buscarPeloId(idCliente);
         ArrayList<Conta> contas = contaService.buscarPeloIdCliente(cliente.getId());
         model.addAttribute("cliente", cliente);
@@ -207,7 +211,7 @@ public class ViewController {
 
         if (res != null) {
             transacaoService.salvarTransacao(res, formTransacao.getValor(), 1);
-            return "redirect://localhost:8080/hellobank/view/extrato/" + numeroConta;
+            return "redirect:/hellobank/view/extrato/" + numeroConta;
         } else {
             model.addAttribute("formTransacao", new Transacao());
             return "deposito";
@@ -247,7 +251,7 @@ public class ViewController {
                 // idTipoTransacao(integer).
                 // Para idTipoTransacao: 1 == depósito, 2 == saque, 3 == transferência
                 transacaoService.salvarTransacao(contaOrigem, contaDestino, valor, 3);
-                return "redirect://localhost:8080/hellobank/view/extrato/" + numeroContaOrigem;
+                return "redirect:/hellobank/view/extrato/" + numeroContaOrigem;
             }
         }
         return "transferencia";
@@ -277,7 +281,7 @@ public class ViewController {
 
         if (res != null) {
             transacaoService.salvarTransacao(res, formTransacao.getValor(), 2);
-            return "redirect://localhost:8080/hellobank/view/extrato/" + numeroConta;
+            return "redirect:/hellobank/view/extrato/" + numeroConta;
         } else {
             model.addAttribute("formTransacao", new Transacao());
             return "deposito";
@@ -318,10 +322,10 @@ public class ViewController {
             contaService.criarConta(formConta);
             Conta res = contaService.buscarPeloNumero(formConta.getNumeroConta());
             if (res != null) {
-                return "redirect://localhost:8080/hellobank/view/saldo/" + idCliente;
+                return "redirect:/hellobank/view/saldo/" + idCliente;
             }
         }
-        return "redirect://localhost:8080/hellobank/view/nova_conta/" + idCliente;
+        return "redirect:/hellobank/view/nova_conta/" + idCliente;
     }
 
     /* Atualizar dados do cliente */
@@ -335,7 +339,7 @@ public class ViewController {
 
     @PostMapping("/config_dados/{idCliente}")
     public String configDadosPost(@PathVariable Integer idCliente, Cliente cliente, Model model){
-        Cliente atualizado = clienteService.buscarPeloId(idCliente);
+    Cliente atualizado = clienteService.buscarPeloId(idCliente);
         atualizado.setContato(cliente.getContato());
         atualizado.setCpfCnpj(cliente.getCpfCnpj());
         atualizado.setEmail(cliente.getEmail());
@@ -344,6 +348,6 @@ public class ViewController {
         atualizado.setSenha(cliente.getSenha());
         clienteService.atualizar(atualizado);
         model.addAttribute("cliente", atualizado);
-        return "redirect://localhost:8080/hellobank/view/config_dados/" + idCliente;
+        return "redirect:/hellobank/view/config_dados/" + idCliente;
     }
 }
