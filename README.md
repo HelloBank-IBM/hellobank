@@ -427,3 +427,45 @@ public class TipoConta {
 private Integer codigo;
 private String nome;
 ```
+
+## Front-End - Prévia das telas da aplicação
+
+### Tela de Login
+
+![image](https://user-images.githubusercontent.com/93226440/191631928-c8650b04-69f6-409a-91f3-92bde16ae3c6.png)
+
+### Formulário de Cadastro de Cliente
+![image](https://user-images.githubusercontent.com/93226440/191632160-85e104c0-0d46-47b2-9f29-a862f121de4f.png)
+
+### Tela inicial
+![image](https://user-images.githubusercontent.com/93226440/191632210-9f7a884b-e443-4be3-8088-87fc07752e31.png)
+
+### Saldo
+![image](https://user-images.githubusercontent.com/93226440/191632247-e36c09f6-5fe5-4e98-b636-8f0ca8cb7c41.png)
+
+### Extrato
+![image](https://user-images.githubusercontent.com/93226440/191632365-dceff3f1-7943-4ae8-93de-0163e2f26c74.png)
+
+Quanto não há transações registradas para a conta selecionada, essa informação é exibida na tela: 
+![image](https://user-images.githubusercontent.com/93226440/191632493-65f3ae91-6d22-4385-9bf5-2cebf77cc21c.png)
+
+### Saque
+![image](https://user-images.githubusercontent.com/93226440/191632571-40172dd1-3b65-42db-a869-3c0c185c7ddc.png)
+
+### Trânsferência
+![image](https://user-images.githubusercontent.com/93226440/191632644-1b1c53b5-c32f-4984-9332-1a5637d59d0f.png)
+
+### Cadastrar conta
+![image](https://user-images.githubusercontent.com/93226440/191632688-ad9d6bb7-c697-4005-859b-1f5d5c47da1d.png)
+
+### Depósito
+![image](https://user-images.githubusercontent.com/93226440/191632794-6743ec54-64e4-4cd3-aff3-0a2258e549ef.png)
+
+### Formulário de atualização de cadastro de cliente
+![image](https://user-images.githubusercontent.com/93226440/191632825-fafe347f-a2fc-45b0-a41c-2f8d0d1615c3.png)
+
+
+
+
+
+
