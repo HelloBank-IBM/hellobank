@@ -86,7 +86,21 @@ Criar uma aplicação para o banco fictício *HelloBank*, utilizando conheciment
  ## Como executar a aplicação
   Antes de iniciar a aplicação, é necessário criar um banco de dados no MySQL chamado **hellobank** na porta **3306**, no **localhost**. Configure seus usuário e senha no arquivo `src\main\resources\application.properties`, e execute os <a href="https://github.com/HelloBank-IBM/hellobank/blob/main/sql_script_hellobank.sql">Scripts SQL</a> para criação e população das tabelas. A seguir, torne os scripts shell executáveis com o comando `chmod +x` e execute a aplicação com o comando `./start.sh`
  
- ## Banco de dados
+## Tecnologias, Stacks e Ferramentas
+- Java
+- Maven
+- MySQL
+- Spring Framework (Spring Boot, Spring Data JPA)
+- Thymeleaf
+- HTML
+- CSS
+- Bootstrap
+- Jenkins
+- Deploy na AWS (EC2)
+- Metodologia Ágil Kanban
+- Trello (para organização, definição e controle de tarefas e prazos). Nosso workspace do Trello pode ser visto <a href="https://trello.com/invite/b/RdhTJjmc/3613e053f5b4289e0e8fc14f59c23264/projeto-hello-bank-ibm" target="_blank"> aqui</a>.
+
+## Banco de dados
   Clique <a href="https://github.com/HelloBank-IBM/hellobank/blob/main/sql_script_hellobank.sql">aqui</a> para visualizar o Script SQL.
   
   Diagrama EER:
@@ -94,7 +108,7 @@ Criar uma aplicação para o banco fictício *HelloBank*, utilizando conheciment
   ![image](https://user-images.githubusercontent.com/93226440/190196397-1e023b8b-b799-4372-a058-22f785179fbe.png)
   
  ## Endpoints
- A documentação completa dos Endpoints da aplicação podem ser visualizada <a href="Model-View-Controller" target="_blank"> aqui </a>.
+ A documentação completa dos Endpoints da aplicação podem ser visualizada <a href="https://documenter.getpostman.com/view/21287524/2s7Z7cjWxh" target="_blank"> aqui </a>.
 
 ### Classe **Conta**
 A entidade Conta possui os seguintes atributos:
